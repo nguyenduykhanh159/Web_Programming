@@ -6,10 +6,14 @@ import java.util.List;
 import com.example.demo.model.ProductModel;
 import com.example.demo.model.UserModel;
 
+import org.apache.catalina.User;
+import org.springframework.stereotype.Repository;
+
+@Repository("mockData")
 public class MockDataRepo{
-    private static List<UserModel> users;
-    private static List<ProductModel> products;
-    private MockDataRepo()
+    private static List<UserModel> users=new ArrayList<UserModel>();
+    private static List<ProductModel> products=new ArrayList<ProductModel>();
+    public MockDataRepo()
     {
         UserModel user1=new UserModel();
         user1.setUserId(1);

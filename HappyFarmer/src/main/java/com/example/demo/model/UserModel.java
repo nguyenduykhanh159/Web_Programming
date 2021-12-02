@@ -6,6 +6,7 @@ public class UserModel {
     private String address;
     private String name;
 
+    public UserModel(){}
     public int getUserId() {
         return this.userId;
     }
