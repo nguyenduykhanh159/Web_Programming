@@ -3,23 +3,25 @@ package com.example.demo.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.Order;
-
 import com.example.demo.model.CartModel;
+import com.example.demo.model.JobModel;
 import com.example.demo.model.OrderModel;
 import com.example.demo.model.ProductDetail;
 import com.example.demo.model.ProductModel;
 import com.example.demo.model.UserModel;
+import com.example.demo.model.WorkplaceModel;
 
-import org.apache.catalina.User;
 import org.springframework.stereotype.Repository;
 
 @Repository("mockData")
 public class MockDataRepo{
     private static List<UserModel> users=new ArrayList<UserModel>();
     private static List<ProductModel> products=new ArrayList<ProductModel>();
-    private static List<CartModel> carts=new ArrayList<CartModel>();
+    // private static List<CartModel> carts=new ArrayList<CartModel>();
     private static List<OrderModel> orders=new ArrayList<OrderModel>();
+    private static List<JobModel> jobs = new ArrayList<JobModel>();
+    private static List<WorkplaceModel> workplaces = new ArrayList<WorkplaceModel>();
+
     public MockDataRepo()
     {
         UserModel user1=new UserModel();
@@ -89,9 +91,9 @@ public class MockDataRepo{
         prodsInCart3.add(prodDetail4);
         cart3.setProducts(prodsInCart3);
 
-        carts.add(cart1);
-        carts.add(cart2);
-        carts.add(cart3);
+        // carts.add(cart1);
+        // carts.add(cart2);
+        // carts.add(cart3);
 
         OrderModel order1=new OrderModel();
         order1.setOrderID(1);
@@ -106,10 +108,23 @@ public class MockDataRepo{
         order3.setListProduct(prodsInCart3);
         orders.add(order3);
 
+        JobModel job1 = new JobModel(1, "job1", "lam cong viec 1", 100f);
+        JobModel job2 = new JobModel(2, "job2", "lam cong viec 2", 200f);
+        JobModel job3 = new JobModel(3, "job3", "lam cong viec 3", 300f);
+        JobModel job4 = new JobModel(4, "job4", "lam cong viec 4", 500f);
+        jobs.add(job1);
+        jobs.add(job2);
+        jobs.add(job3);
+        jobs.add(job4);
 
-
-
-
+        WorkplaceModel workplace1 = new WorkplaceModel(1, "cay ruong", 100f, "Bach Khoa");
+        WorkplaceModel workplace2 = new WorkplaceModel(2, "trong ngo", 200f, "Bach Khoa");
+        WorkplaceModel workplace3 = new WorkplaceModel(3, "trong trot", 300f, "Bach Khoa");
+        WorkplaceModel workplace4 = new WorkplaceModel(4, "trong nua", 400f, "Bach Khoa");
+        workplaces.add(workplace1);
+        workplaces.add(workplace2);
+        workplaces.add(workplace3);
+        workplaces.add(workplace4);
     }
     //User info
     public List<UserModel> getAllUsers()
@@ -155,14 +170,14 @@ public class MockDataRepo{
 
 
     //Cart info
-    public List<CartModel> getAllCarts()
-    {
-        return carts;
-    }
-    public void addCart(CartModel cart)
-    {
-        carts.add(cart);
-    }
+    // public List<CartModel> getAllCarts()
+    // {
+    //     return carts;
+    // }
+    // public void addCart(CartModel cart)
+    // {
+    //     carts.add(cart);
+    // }
 
     // Order 
     public List<OrderModel> getAllOrders()
@@ -185,5 +200,41 @@ public class MockDataRepo{
         orders.add(order);
     }
     
-    
+    // Job info
+    public List<JobModel> getAllJobs() {
+        return jobs;
+    }
+
+    public JobModel getJob(int jobId) {
+        for(JobModel j:jobs)
+        {
+            if(j.getJobID()==jobId)
+            {
+                return j;
+            }
+        }
+        return null;
+    }
+
+    public void addJob(JobModel job) {
+        jobs.add(job);
+    }
+
+    // Workplace info
+    public List<WorkplaceModel> getAllWorkplaces() {
+        return workplaces;
+    }
+
+    public WorkplaceModel getWorkplace(int workplaceId) {
+        for (WorkplaceModel w : workplaces) {
+            if (w.getPlaceID() == workplaceId) {
+                return w;
+            }
+        }
+        return null;
+    }
+
+    public void addWorkplace(WorkplaceModel workplace) {
+        workplaces.add(workplace);
+    } 
 }
