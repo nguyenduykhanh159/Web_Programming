@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OrderModel {
     private int orderID;
-    private List<ProductModel> listProduct;
+    private List<ProductDetail> listProduct;
     private String createAt;
     private String receiveAt;
 
@@ -12,7 +12,7 @@ public class OrderModel {
 
     }
 
-    public OrderModel(int orderID, List<ProductModel> listProduct, String createAt, String receiveAt) {
+    public OrderModel(int orderID, List<ProductDetail> listProduct, String createAt, String receiveAt) {
         this.orderID = orderID;
         this.listProduct = listProduct;
         this.createAt = createAt;
@@ -27,11 +27,11 @@ public class OrderModel {
         this.orderID = orderID;
     }
 
-    public List<ProductModel> getListProduct() {
+    public List<ProductDetail> getListProduct() {
         return this.listProduct;
     }
 
-    public void setListProduct(List<ProductModel> listProduct) {
+    public void setListProduct(List<ProductDetail> listProduct) {
         this.listProduct = listProduct;
     }
 
