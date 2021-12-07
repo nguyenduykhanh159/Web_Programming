@@ -16,12 +16,6 @@ public class CartServiceImpl implements CartService{
     {
         this.cartRepo=repo;
     }
-    @Override
-    public CartModel getCartInfo(int cartId) {
-        // TODO Auto-generated method stub
-        
-        return cartRepo.getCartInfo(cartId);
-    }
 
     @Override
     public List<CartModel> getAllCarts() {

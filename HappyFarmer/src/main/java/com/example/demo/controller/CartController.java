@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.net.http.HttpClient;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -8,8 +9,11 @@ import com.example.demo.model.CartModel;
 import com.example.demo.service.CartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,9 +31,10 @@ public class CartController {
     {
         return cartService.getAllCarts();
     }
-    @GetMapping("/{cartid}")
-   public CartModel getCartInfo(@PathVariable("cartid") Integer cartid)
+   @PostMapping("")
+   public CartModel addCart(@RequestBody CartModel cart)
    {
-       return cartService.getCartInfo(cartid);
+       cartService.addCart(cart);
+       return cart;
    } 
 }

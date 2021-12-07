@@ -3,7 +3,10 @@ package com.example.demo.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.Order;
+
 import com.example.demo.model.CartModel;
+import com.example.demo.model.OrderModel;
 import com.example.demo.model.ProductDetail;
 import com.example.demo.model.ProductModel;
 import com.example.demo.model.UserModel;
@@ -16,6 +19,7 @@ public class MockDataRepo{
     private static List<UserModel> users=new ArrayList<UserModel>();
     private static List<ProductModel> products=new ArrayList<ProductModel>();
     private static List<CartModel> carts=new ArrayList<CartModel>();
+    private static List<OrderModel> orders=new ArrayList<OrderModel>();
     public MockDataRepo()
     {
         UserModel user1=new UserModel();
@@ -66,7 +70,6 @@ public class MockDataRepo{
 
         //Cart 1
         CartModel cart1=new CartModel();
-        cart1.setCartId(1);
         List<ProductDetail> prodsInCart1=new ArrayList<ProductDetail>();
         prodsInCart1.add(prodDetail1);
         prodsInCart1.add(prodDetail2);
@@ -74,7 +77,6 @@ public class MockDataRepo{
 
         //Cart 2
         CartModel cart2=new CartModel();
-        cart2.setCartId(2);
         List<ProductDetail> prodsInCart2=new ArrayList<ProductDetail>();
         prodsInCart2.add(prodDetail1);
         prodsInCart2.add(prodDetail3);
@@ -82,7 +84,6 @@ public class MockDataRepo{
 
         //Cart 3
         CartModel cart3=new CartModel();
-        cart3.setCartId(3);
         List<ProductDetail> prodsInCart3=new ArrayList<ProductDetail>();
         prodsInCart3.add(prodDetail2);
         prodsInCart3.add(prodDetail4);
@@ -91,6 +92,21 @@ public class MockDataRepo{
         carts.add(cart1);
         carts.add(cart2);
         carts.add(cart3);
+
+        OrderModel order1=new OrderModel();
+        order1.setOrderID(1);
+        order1.setListProduct(prodsInCart1);
+        orders.add(order1);
+        OrderModel order2=new OrderModel();
+        order2.setOrderID(2);
+        order2.setListProduct(prodsInCart2);
+        orders.add(order2);
+        OrderModel order3=new OrderModel();
+        order3.setOrderID(3);
+        order3.setListProduct(prodsInCart3);
+        orders.add(order3);
+
+
 
 
 
@@ -139,17 +155,6 @@ public class MockDataRepo{
 
 
     //Cart info
-    public CartModel getCartInfo(int cartId)
-    {
-        for(CartModel cart : carts)
-        {
-            if(cart.getCartId()==cartId)
-            {
-                return cart;
-            }
-        }
-        return null;
-    }
     public List<CartModel> getAllCarts()
     {
         return carts;
@@ -158,15 +163,27 @@ public class MockDataRepo{
     {
         carts.add(cart);
     }
-    public boolean addProductToCart(int cartId,ProductDetail productDetail)
+
+    // Order 
+    public List<OrderModel> getAllOrders()
     {
-        CartModel cart=getCartInfo(cartId);
-        if(cart!=null)
-        {
-            cart.getProducts().add(productDetail);
-            return true;
-        }
-        return false;
+        return orders;
     }
+    public OrderModel getOrderInfo(int orderId)
+    {
+        for(OrderModel order: orders)
+        {
+            if(order.getOrderID()==orderId)
+            {
+                return order;
+            }
+        }
+        return null;
+    }
+    public void addOrder(OrderModel order)
+    {
+        orders.add(order);
+    }
+    
     
 }
