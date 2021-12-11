@@ -1,11 +1,11 @@
-package com.example.demo.service;
+// package com.example.demo.service;
 
-import java.util.List;
+// import java.util.List;
 
-import com.example.demo.model.CartModel;
+// import com.example.demo.model.CartModel;
 
-public interface CartService {
+// public interface CartService {
    
-    public List<CartModel> getAllCarts();
-    public void addCart(CartModel cart);
-}
+//     public List<CartModel> getAllCarts();
+//     public void addCart(CartModel cart);
+// }
