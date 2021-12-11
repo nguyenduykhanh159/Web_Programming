@@ -30,7 +30,6 @@ public class Farmer extends User {
     @OneToMany(mappedBy = "farmer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<FarmerSociety> societies=new HashSet<>();
 
-
     public Set<FarmerSociety> getSocieties() {
         return societies;
     }

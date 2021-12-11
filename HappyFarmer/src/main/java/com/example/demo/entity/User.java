@@ -1,13 +1,9 @@
 package com.example.demo.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="usez")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,7 +17,9 @@ public class User {
     private String address;
     @Column(name="name")
     private String name;
-   
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Order> orders=new HashSet<>();
 
     public int getId() {
         return this.id;

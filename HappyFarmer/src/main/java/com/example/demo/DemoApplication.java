@@ -8,22 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication implements CommandLineRunner {
+public class DemoApplication  {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Autowired
-	private UserRepository userRepository;
-	@Override
-	public void run(String... args) throws Exception {
-
-		Farmer farmer=new Farmer();
-		farmer.setAge(22);
-		farmer.setAddress("Huu Van, Chuong My, Ha Noi");
-		farmer.setName("Phung Xuan Quan");
-		farmer.setPhone("0974654701");
-
-		userRepository.save(farmer);
-	}
 }

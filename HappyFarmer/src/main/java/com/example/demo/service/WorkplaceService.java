@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.model.WorkplaceModel;
+
 import java.util.List;
 
-import com.example.demo.model.WorkplaceModel;
 
 public interface WorkplaceService {
     public List<WorkplaceModel> getAllWorkplaces();
