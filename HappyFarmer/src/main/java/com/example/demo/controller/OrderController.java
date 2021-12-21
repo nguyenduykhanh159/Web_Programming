@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.model.OrderModel;
+import com.example.demo.dto.OrderDTO;
 import com.example.demo.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +20,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @GetMapping("")
-    public List<OrderModel> getAllOrders()
+    public List<OrderDTO> getAllOrders()
     {
         return orderService.getAllOrders();
     }
     @GetMapping("/{orderid}")
-   public OrderModel getOrderInfo(@PathVariable("orderid") Integer orderid)
+   public OrderDTO getOrderInfo(@PathVariable("orderid") Integer orderid)
    {
        return orderService.getOrderInfo(orderid);
    }
    @PostMapping("")
-   public OrderModel addOrder(@RequestBody OrderModel order)
+   public OrderDTO addOrder(@RequestBody OrderDTO order)
    {
        orderService.addOrder(order);
        return order;

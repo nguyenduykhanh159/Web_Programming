@@ -2,8 +2,8 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
-import com.example.demo.dao.MockDataRepo;
-import com.example.demo.model.JobModel;
+import com.example.demo.dao.JobRepository;
+import com.example.demo.dto.JobDTO;
 import com.example.demo.service.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +11,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JobServiceImpl implements JobService{
-    private final MockDataRepo dataRepo;
+    private final JobRepository jobRepository;
 
     @Autowired
-    public JobServiceImpl(MockDataRepo dataRepo) {
-        this.dataRepo = dataRepo;
+    public JobServiceImpl(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
     }
 
     @Override
-    public List<JobModel> getAllJobs() {
-        return dataRepo.getAllJobs();
+    public List<JobDTO> getAllJobs() {
+        return jobRepository.findAll();
     }
 
     @Override
-    public JobModel getJob(int jobId) {
-        return dataRepo.getJob(jobId);
+    public JobDTO getJob(int jobId) {
+        return jobRepository.findById(jobId);
     }
 
     @Override
-    public void addJob(JobModel job) {
-        dataRepo.addJob(job);
+    public void addJob(JobDTO job) {
+        jobRepository.addJob(job);
     }
 }

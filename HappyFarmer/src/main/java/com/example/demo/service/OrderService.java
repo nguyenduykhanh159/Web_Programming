@@ -2,10 +2,10 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.model.OrderModel;
+import com.example.demo.dto.OrderDTO;
 
 public interface OrderService {
-   public OrderModel getOrderInfo(int orderId);
-    public List<OrderModel> getAllOrders();
-    public void addOrder(OrderModel order); 
+   public OrderDTO getOrderInfo(int orderId);
+    public List<OrderDTO> getAllOrders();
+    public void addOrder(OrderDTO order); 
 }

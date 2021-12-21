@@ -2,10 +2,10 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.model.JobModel;
+import com.example.demo.dto.JobDTO;
 
 public interface JobService {
-    public List<JobModel> getAllJobs();
-    public JobModel getJob(int id);
-    public void addJob(JobModel job);
+    public List<JobDTO> getAllJobs();
+    public JobDTO getJob(int id);
+    public void addJob(JobDTO job);
 }

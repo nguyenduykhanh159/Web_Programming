@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.model.ProductModel;
+import com.example.demo.dto.ProductDTO;
 import com.example.demo.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,17 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductModel> getAllProducts() {
+    public List<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    public ProductModel getProduct(@PathVariable("id") Integer prodId) {
+    public ProductDTO getProduct(@PathVariable("id") Integer prodId) {
         return productService.getProduct(prodId);
     }
 
     @PostMapping
-    public int addProduct(@RequestBody ProductModel prod) {
+    public int addProduct(@RequestBody ProductDTO prod) {
         productService.addProduct(prod);
         return 1;
     }

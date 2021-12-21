@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.model.JobModel;
+import com.example.demo.dto.JobDTO;
 import com.example.demo.service.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,17 @@ public class JobController {
     }
 
     @GetMapping
-    public List<JobModel> getAllJobs() {
+    public List<JobDTO> getAllJobs() {
         return jobService.getAllJobs();
     }
 
     @GetMapping("/{id}")
-    public JobModel getJob(@PathVariable("id") int jobId) {
+    public JobDTO getJob(@PathVariable("id") int jobId) {
         return jobService.getJob(jobId);
     }
 
     @PostMapping
-    public int addJob(@RequestBody JobModel job) {
+    public int addJob(@RequestBody JobDTO job) {
         jobService.addJob(job);
         return 1;
     }

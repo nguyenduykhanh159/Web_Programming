@@ -1,12 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.WorkplaceModel;
+import com.example.demo.dto.WorkplaceDTO;
 
 import java.util.List;
 
 
 public interface WorkplaceService {
-    public List<WorkplaceModel> getAllWorkplaces();
-    public WorkplaceModel getWorkplace(int workplaceId);
-    public void addWorkplace(WorkplaceModel workplace);
+    public List<WorkplaceDTO> getAllWorkplaces();
+    public WorkplaceDTO getWorkplace(int workplaceId);
+    public void addWorkplace(WorkplaceDTO workplace);
 }

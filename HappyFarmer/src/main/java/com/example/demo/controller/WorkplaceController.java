@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.model.WorkplaceModel;
+import com.example.demo.dto.WorkplaceDTO;
 import com.example.demo.service.WorkplaceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,17 @@ public class WorkplaceController {
     }
 
     @GetMapping
-    public List<WorkplaceModel> getAllWorkplaces() {
+    public List<WorkplaceDTO> getAllWorkplaces() {
         return workplaceService.getAllWorkplaces();
     }
 
     @GetMapping("/{id}")
-    public WorkplaceModel getWorkplace(@PathVariable("id") int workplaceId) {
+    public WorkplaceDTO getWorkplace(@PathVariable("id") int workplaceId) {
         return workplaceService.getWorkplace(workplaceId);
     }
 
     @PostMapping
-    public int addWorkplace(@RequestBody WorkplaceModel workplace) {
+    public int addWorkplace(@RequestBody WorkplaceDTO workplace) {
         workplaceService.addWorkplace(workplace);
         return 1;
     }
