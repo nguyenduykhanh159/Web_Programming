@@ -4,8 +4,11 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 
 @Entity(name="order_product")
+@Data
 public class OrderProduct {
 
     @EmbeddedId
@@ -28,32 +31,4 @@ public class OrderProduct {
     @JoinColumn(name="product_id")
     private Product product;
 
-
-
-
-
-    public Order getOrder() {
-        return this.order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Product getProduct() {
-        return this.product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-    public int getQuanity() {
-        return this.quanity;
-    }
-
-    public void setQuanity(int quanity) {
-        this.quanity = quanity;
-    }
-
-   
 }

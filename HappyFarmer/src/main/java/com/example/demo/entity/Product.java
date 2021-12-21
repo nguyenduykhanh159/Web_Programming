@@ -6,7 +6,10 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity(name="product")
+@Data
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,54 +28,4 @@ public class Product {
     private Set<OrderProduct> orders=new HashSet<>();
 
 
-
-    public Set<OrderProduct> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<OrderProduct> orders) {
-        this.orders = orders;
-    }
-
-
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getExpirationDate() {
-        return this.expirationDate;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public float getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return this.quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }

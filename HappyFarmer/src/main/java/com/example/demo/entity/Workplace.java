@@ -4,10 +4,13 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "workplace")
+@Data
 public class Workplace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,36 +31,5 @@ public class Workplace {
 
     @OneToMany(mappedBy = "workplace")
     private Set<Job> jobs=new HashSet<>();
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTypeWork() {
-        return this.typeWork;
-    }
-
-    public void setTypeWork(String typeWork) {
-        this.typeWork = typeWork;
-    }
-
-    public float getArea() {
-        return this.area;
-    }
-
-    public void setArea(float area) {
-        this.area = area;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+ 
 }

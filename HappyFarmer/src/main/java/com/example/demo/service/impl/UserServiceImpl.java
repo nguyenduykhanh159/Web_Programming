@@ -1,17 +1,15 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
-
-import com.example.demo.dao.MockDataRepo;
 import com.example.demo.dao.UserRepository;
-import com.example.demo.dto.user.UserDTO;
+import com.example.demo.dto.user.FarmerDTO;
+import com.example.demo.dto.user.SocietyDTO;
+import com.example.demo.entity.Farmer;
+import com.example.demo.entity.Society;
 import com.example.demo.entity.User;
 import com.example.demo.mapping.user.UserMapping;
-import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private UserMapping userMapping;
 
@@ -28,9 +27,10 @@ public class UserServiceImpl implements UserService {
     }
 
     // @Override
-    // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    //     // TODO Auto-generated method stub
-    //     return null;
+    // public UserDetails loadUserByUsername(String username) throws
+    // UsernameNotFoundException {
+    // // TODO Auto-generated method stub
+    // return null;
     // }
 
     @Override
@@ -39,17 +39,27 @@ public class UserServiceImpl implements UserService {
         return userRepository.getById(userId);
     }
 
-
     @Override
-    public void addFarmerUser(UserDTO user) {
-        // TODO Auto-generated method stub
-        
+    public boolean addFarmerUser(FarmerDTO farmerDTO) {
+
+        Farmer farmer = userMapping.mapFarmerDtoToFarmer(farmerDTO);
+        if (userRepository.save(farmer) != null) {
+            return true;
+        }
+        ;
+        return false;
+       
     }
 
     @Override
-    public void addSocietyUser(UserDTO user) {
-        // TODO Auto-generated method stub
-        
+    public boolean addSocietyUser(SocietyDTO societyDTO) {
+
+        Society society = userMapping.mapSocietyDtoToSociety(societyDTO);
+        if (userRepository.save(society) != null) {
+            return true;
+        }
+        return false;
+
     }
-    
+
 }
