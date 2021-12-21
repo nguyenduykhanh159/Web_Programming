@@ -1,19 +1,22 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity(name = "society")
+@Data
 public class Society extends User{
 
     @Column(name = "total_capital")
     private float totalCapital;
     @Column(name="established_date")
-    private LocalDate establishesDate;
+    @Temporal(TemporalType.DATE)
+    private Date establishesDate;
     @Column(name="industry_code")
     private String industryCode;
 
@@ -21,35 +24,4 @@ public class Society extends User{
     private Set<FarmerSociety> farmers=new HashSet<>();
 
 
-    public Set<FarmerSociety> getFarmers() {
-        return farmers;
-    }
-
-    public void setFarmers(Set<FarmerSociety> farmers) {
-        this.farmers = farmers;
-    }
-
-    public float getTotalCapital() {
-        return this.totalCapital;
-    }
-
-    public void setTotalCapital(float totalCapital) {
-        this.totalCapital = totalCapital;
-    }
-
-    public LocalDate getEstablishesDate() {
-        return this.establishesDate;
-    }
-
-    public void setEstablishesDate(LocalDate establishesDate) {
-        this.establishesDate = establishesDate;
-    }
-
-    public String getIndustryCode() {
-        return this.industryCode;
-    }
-
-    public void setIndustryCode(String industryCode) {
-        this.industryCode = industryCode;
-    }
 }
