@@ -6,7 +6,10 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity(name="farmer_job")
+@Data
 public class FarmerJob {
 
     @EmbeddedId
@@ -29,39 +32,4 @@ public class FarmerJob {
     @MapsId("job_id")
     @JoinColumn(name="job_id")
     private Job job;
-
-
-
-
-    public FarmerJobID getFarmerJobID() {
-        return farmerJobID;
-    }
-
-    public void setFarmerJobID(FarmerJobID farmerJobID) {
-        this.farmerJobID = farmerJobID;
-    }
-
-    public Farmer getWorker() {
-        return this.worker;
-    }
-
-    public void setWorker(Farmer worker) {
-        this.worker = worker;
-    }
-
-    public Job getJob() {
-        return this.job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
-    }
-
-    public LocalDate getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
 }

@@ -1,14 +1,21 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "farmer_society")
+import lombok.Data;
+
+@Entity(name = "farmer_society")
+@Data
 public class FarmerSociety {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name="joined_date")
+    private LocalDateTime joinedDate;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "farmer_id")
@@ -18,33 +25,4 @@ public class FarmerSociety {
     @JoinColumn(name = "society_id")
     private Society society;
 
-
-
-
-
-    public Farmer getFarmer() {
-        return farmer;
-    }
-
-    public void setFarmer(Farmer farmer) {
-        this.farmer = farmer;
-    }
-
-    public Society getSociety() {
-        return society;
-    }
-
-    public void setSociety(Society society) {
-        this.society = society;
-    }
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
