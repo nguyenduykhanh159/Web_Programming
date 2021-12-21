@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,7 @@ public class Society extends User{
     @Column(name = "total_capital")
     private float totalCapital;
     @Column(name="established_date")
-    private Date establishesDate;
+    private LocalDate establishesDate;
     @Column(name="industry_code")
     private String industryCode;
 
@@ -36,11 +37,11 @@ public class Society extends User{
         this.totalCapital = totalCapital;
     }
 
-    public Date getEstablishesDate() {
+    public LocalDate getEstablishesDate() {
         return this.establishesDate;
     }
 
-    public void setEstablishesDate(Date establishesDate) {
+    public void setEstablishesDate(LocalDate establishesDate) {
         this.establishesDate = establishesDate;
     }
 
