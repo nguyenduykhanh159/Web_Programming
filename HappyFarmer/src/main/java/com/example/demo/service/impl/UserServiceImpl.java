@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.example.demo.dao.MockDataRepo;
 import com.example.demo.dao.UserRepository;
+import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.User;
+import com.example.demo.mapping.user.UserMapping;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
 
@@ -17,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserMapping userMapping;
 
     @Override
     public List<User> getAllUsers() {
@@ -35,9 +39,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.getById(userId);
     }
 
+
     @Override
-    public void addUser(User user) {
-        userRepository.save(user);
+    public void addFarmerUser(UserDTO user) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void addSocietyUser(UserDTO user) {
         // TODO Auto-generated method stub
         
     }
