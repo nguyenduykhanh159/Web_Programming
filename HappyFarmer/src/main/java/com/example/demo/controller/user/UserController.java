@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.example.demo.entity.Farmer;
 import com.example.demo.entity.Society;
 import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
+import com.example.demo.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

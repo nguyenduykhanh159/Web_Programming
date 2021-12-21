@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ public class FarmerJob {
     private FarmerJobID farmerJobID;
     @Column(name="created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate createdAt;
+    private Date createdAt;
 
 
     // 1 farmer can have n farmer job

@@ -15,8 +15,7 @@ public class SocietyDTO extends UserDTO{
     private String industry_code;
 
     @JsonProperty("established_date")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate established_date;
+    private Date established_date;
 
     @JsonProperty("total_capital")
     private Float total_capital;

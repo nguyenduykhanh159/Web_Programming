@@ -26,12 +26,13 @@ public class Farmer extends User {
     
 
     //1 farmer do n jobs
-    @OneToMany(mappedBy = "worker")
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<FarmerJob> doJob=new HashSet<FarmerJob>();
+    @JoinTable(name="farmer_job",joinColumns = @JoinColumn(name="farmer_id"),inverseJoinColumns = @JoinColumn(name="job_id"))
+    private Set<Job> jobs=new HashSet<Job>();
 
-    @OneToMany(mappedBy = "farmer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<FarmerSociety> societies=new HashSet<>();
+    @ManyToMany(mappedBy = "farmers",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Society> societies=new HashSet<>();
 
-   
+    
 }
