@@ -2,11 +2,15 @@ package com.example.demo.entity;
 
 
 import javax.persistence.*;
+
+import lombok.Data;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name="usez")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,39 +21,15 @@ public class User {
     private String address;
     @Column(name="name")
     private String name;
-
+    @Column(name="username")
+    private String username;
+    @Column(name="password")
+    private String password;
+    @Column(name="email")
+    private String email;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Order> orders=new HashSet<>();
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name="user_role",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
+    private Set<Role> authorities=new HashSet<>();
 }

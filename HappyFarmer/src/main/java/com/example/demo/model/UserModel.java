@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import lombok.Data;
+
+@Data
 public class UserModel {
     private int userId;
     private String phone;

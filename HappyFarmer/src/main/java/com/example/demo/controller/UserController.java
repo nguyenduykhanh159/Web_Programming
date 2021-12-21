@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.entity.User;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
 
@@ -21,17 +22,17 @@ public class UserController {
         this.userService=userService;
     }
     @GetMapping("")
-    public List<UserModel> getAllUsers()
+    public List<User> getAllUsers()
     {
         return userService.getAllUsers();
     }
     @GetMapping("/{id}")
-    public UserModel getUser(@PathVariable("id") Integer userId)
+    public User getUser(@PathVariable("id") Integer userId)
     {
         return userService.getUser(userId);
     }
 
-    public void addUser(UserModel user)
+    public void addUser(User user)
     {
         userService.addUser(user);
     }
