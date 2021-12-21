@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,8 +21,9 @@ public class Society extends User{
     @Column(name="industry_code")
     private String industryCode;
 
-    @OneToMany(mappedBy = "society",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<FarmerSociety> farmers=new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name="farmer_society",joinColumns = @JoinColumn(name="society_id"),inverseJoinColumns = @JoinColumn(name="farmer_id"))
+    private Set<Farmer> farmers=new HashSet<>();
 
 
 }

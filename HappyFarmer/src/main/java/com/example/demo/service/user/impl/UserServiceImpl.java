@@ -1,6 +1,11 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.user.impl;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.user.FarmerDTO;
 import com.example.demo.dto.user.SocietyDTO;
@@ -8,7 +13,8 @@ import com.example.demo.entity.Farmer;
 import com.example.demo.entity.Society;
 import com.example.demo.entity.User;
 import com.example.demo.mapping.user.UserMapping;
-import com.example.demo.service.UserService;
+import com.example.demo.service.user.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +54,7 @@ public class UserServiceImpl implements UserService {
         }
         ;
         return false;
-       
+
     }
 
     @Override
@@ -60,6 +66,26 @@ public class UserServiceImpl implements UserService {
         }
         return false;
 
+    }
+
+    @Override
+    @Transactional
+    public boolean addUserToSociety(int userId, int societyId) {
+        // TODO Auto-generated method stub
+
+        try {
+            Farmer farmer = (Farmer) userRepository.getById(userId);
+            Society society = (Society) userRepository.getById(societyId);
+
+            farmer.setSocieties(Set.copyOf(Arrays.asList(society)));
+            society.setFarmers(Set.copyOf(Arrays.asList(farmer)));
+            userRepository.save(farmer);
+            userRepository.save(society);
+            return true;
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        }
+        return false;
     }
 
 }
