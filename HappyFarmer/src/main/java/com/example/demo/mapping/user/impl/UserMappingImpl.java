@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMappingImpl implements UserMapping {
+    @Override
     public User mapUserDtoToUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
@@ -38,7 +39,7 @@ public class UserMappingImpl implements UserMapping {
 
     @Override
     public Society mapSocietyDtoToSociety(SocietyDTO societyDTO) {
-        Society society =new Society();
+        Society society = new Society();
         society.setName(societyDTO.getName());
         society.setAddress(societyDTO.getAddress());
         society.setUsername(societyDTO.getUsername());

@@ -6,7 +6,10 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity(name="ordez")
+@Data
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,26 +33,5 @@ public class Order {
     private User user;
     public Set<OrderProduct> getProducts() {
         return products;
-    }
-
-    public void setProducts(Set<OrderProduct> products) {
-        this.products = products;
-    }
-
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 }

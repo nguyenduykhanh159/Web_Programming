@@ -19,17 +19,23 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity(name="job")
+@Data
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
    @Column(name="name")
    private String name;
+
    @Column(name="fee")
    private float fee;
+
    @Column(name="description")
    private String description; 
+
    @Column(name="due")
    @Temporal(TemporalType.DATE)
    private Date due;
@@ -48,61 +54,4 @@ public class Job {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name ="workplace_id")
     private Workplace workplace;
-
-    public Date getDue() {
-        return this.due;
-    }
-
-    public void setDue(Date due) {
-        this.due = due;
-    }
-
-    public Farmer getOwner() {
-        return this.owner;
-    }
-
-    public void setOwner(Farmer owner) {
-        this.owner = owner;
-    }
-
-    public Set<FarmerJob> getContacts() {
-        return this.contacts;
-    }
-
-    public void setContacts(Set<FarmerJob> contacts) {
-        this.contacts = contacts;
-    }
-
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getFee() {
-        return this.fee;
-    }
-
-    public void setFee(float fee) {
-        this.fee = fee;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
