@@ -29,7 +29,7 @@ public class ProductDTO {
     @JsonProperty("price")
     private float price;
 
-    @JsonProperty("disacount")
+    @JsonProperty("discount")
     private float disacount;
 
     @JsonProperty("quantity")
