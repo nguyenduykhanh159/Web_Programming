@@ -1,12 +1,11 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.workplace.impl;
 
 import java.util.List;
 
 import com.example.demo.dto.WorkplaceDTO;
-import com.example.demo.service.WorkplaceService;
+import com.example.demo.service.workplace.WorkplaceService;
 
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class WorkplaceServiceImpl implements WorkplaceService {

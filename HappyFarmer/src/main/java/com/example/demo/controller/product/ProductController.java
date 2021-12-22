@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package com.example.demo.controller.product;
 
 import java.util.List;
 
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.service.ProductService;
+import com.example.demo.dto.product.ProductDTO;
+import com.example.demo.service.product.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/product")
 public class ProductController {
-    private ProductService productService;
-
+    
     @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    private ProductService productService;
 
     @GetMapping
     public List<ProductDTO> getAllProducts() {
@@ -29,13 +26,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDTO getProduct(@PathVariable("id") Integer prodId) {
-        return productService.getProduct(prodId);
+    public ProductDTO getProduct(@PathVariable("id") Integer productId) {
+        return productService.getProduct(productId);
     }
 
     @PostMapping
-    public int addProduct(@RequestBody ProductDTO prod) {
-        productService.addProduct(prod);
-        return 1;
+    public boolean addProduct(@RequestBody ProductDTO productDTO) {
+        productService.addProduct(productDTO);
+        return true;
     }
 }

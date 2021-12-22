@@ -1,14 +1,14 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.order.impl;
 
 import java.util.List;
 
 import com.example.demo.dto.OrderDTO;
-import com.example.demo.service.OrderService;
+import com.example.demo.service.order.OrderService;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO getOrderInfo(int orderId) {

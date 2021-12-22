@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import com.example.demo.dto.OrderDTO;
-import com.example.demo.service.OrderService;
+import com.example.demo.service.order.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +19,7 @@ public class OrderController {
     
     @Autowired
     private OrderService orderService;
+    
     @GetMapping("")
     public List<OrderDTO> getAllOrders()
     {
