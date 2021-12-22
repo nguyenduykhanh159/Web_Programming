@@ -35,7 +35,7 @@ public class Product {
    private float price;
 
    @Column(name = "discount")
-   private float disacount;
+   private float discount;
 
    @Column(name="quantity")
    private int quantity;
