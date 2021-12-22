@@ -1,12 +1,8 @@
 package com.example.demo.service.user.impl;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
 
 import com.example.demo.dao.FarmerRepository;
 import com.example.demo.dao.FarmerSocietyRepository;

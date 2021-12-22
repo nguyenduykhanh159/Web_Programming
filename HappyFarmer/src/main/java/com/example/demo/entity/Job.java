@@ -27,14 +27,34 @@ public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
+
    @Column(name="name")
    private String name;
 
-   @Column(name="fee")
-   private float fee;
+    @Column(name = "image_url")
+    private String image_url;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name="create_At")
+   @Temporal(TemporalType.DATE)
+   private Date create_At;
+
+   @Column(name="salary")
+   private float salary;
+
+   @Column(name = "contact")
+   private String contact;
+
+   @Column(name = "contact_number")
+   private String contact_number;
 
    @Column(name="description")
    private String description; 
+
+   @Column(name = "job_detail")
+   private String job_detail;
 
    @Column(name="due")
    @Temporal(TemporalType.DATE)

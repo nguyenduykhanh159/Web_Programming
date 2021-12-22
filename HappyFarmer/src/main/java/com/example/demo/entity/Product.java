@@ -14,13 +14,29 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
+
    @Column(name="name")
    private String name;
+
+   @Column(name = "image_url")
+   private String image_url;
+
+   @Column(name = "sale")
+   private String sale;
+
+   @Column(name = "category")
+   private String category;
+   
    @Column(name="expiration_date")
    @Temporal(TemporalType.DATE)
    private Date expirationDate;
+
    @Column(name="price")
    private float price;
+
+   @Column(name = "disacount")
+   private float disacount;
+
    @Column(name="quantity")
    private int quantity;
 

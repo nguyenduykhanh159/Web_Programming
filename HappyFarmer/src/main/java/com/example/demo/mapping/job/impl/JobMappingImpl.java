@@ -13,7 +13,7 @@ public class JobMappingImpl implements JobMapping {
     public Job mapJobDtoToJob(JobDTO jobDTO) {
         Job job=new Job();
         job.setName(jobDTO.getName());
-        job.setFee(jobDTO.getFee());
+        job.setSalary(jobDTO.getSalary());
         job.setDescription(jobDTO.getDescription());
         job.setDue(jobDTO.getDue());
         return job;
@@ -23,7 +23,7 @@ public class JobMappingImpl implements JobMapping {
     public JobDTO mapJobtoJobDTO(Job job) {
         JobDTO jobDTO=new JobDTO();
         jobDTO.setName(job.getName());
-        jobDTO.setFee(job.getFee());
+        jobDTO.setSalary(job.getSalary());
         jobDTO.setDescription(job.getDescription());
         jobDTO.setDue(job.getDue());
         return jobDTO;

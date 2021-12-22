@@ -14,7 +14,7 @@ public class ProductMappingImpl implements ProductMapping{
         Product product=new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
-        product.setExpirationDate(productDTO.getExpirationDate());
+        product.setExpirationDate(productDTO.getExpiration_date());
         product.setQuantity(productDTO.getQuantity());
         return product;
     }
@@ -24,7 +24,7 @@ public class ProductMappingImpl implements ProductMapping{
         ProductDTO productDTO=new ProductDTO();
         productDTO.setName(product.getName());
         productDTO.setPrice(product.getPrice());
-        productDTO.setExpirationDate(product.getExpirationDate());
+        productDTO.setExpiration_date(product.getExpirationDate());
         productDTO.setQuantity(product.getQuantity());
         return productDTO;
     }
