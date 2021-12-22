@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -48,8 +47,8 @@ public class Job {
     private Farmer owner;
   
     //1 job can have n contacts 
-    @ManyToMany(mappedBy = "jobs")
-    private Set<Farmer> workers=new HashSet<Farmer>();
+    @OneToMany(mappedBy = "job")
+    private Set<FarmerJob> contacts=new HashSet<FarmerJob>();
 
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

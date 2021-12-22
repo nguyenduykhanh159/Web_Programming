@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.product;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ProductDTO {
     @JsonProperty("expiration_date")
-    private Date expiration_date;
+    private Date expirationDate;
 
     @JsonProperty("name")
     private String name;

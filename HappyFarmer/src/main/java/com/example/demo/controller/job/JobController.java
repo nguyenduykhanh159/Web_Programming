@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package com.example.demo.controller.job;
 
 import java.util.List;
 
-import com.example.demo.dto.JobDTO;
-import com.example.demo.service.JobService;
+import com.example.demo.dto.job.JobDTO;
+import com.example.demo.service.job.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/job")
+@RequestMapping("/job")
 public class JobController {
-    private JobService jobService;
 
     @Autowired
-    public JobController(JobService jobService) {
-        this.jobService = jobService;
-    }
+    private JobService jobService;
+
 
     @GetMapping
     public List<JobDTO> getAllJobs() {
@@ -29,13 +27,13 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public JobDTO getJob(@PathVariable("id") int jobId) {
+    public JobDTO getJob(@PathVariable("id") Integer jobId) {
         return jobService.getJob(jobId);
     }
 
     @PostMapping
-    public int addJob(@RequestBody JobDTO job) {
+    public boolean addJob(@RequestBody JobDTO job) {
         jobService.addJob(job);
-        return 1;
+        return true;
     }
 }

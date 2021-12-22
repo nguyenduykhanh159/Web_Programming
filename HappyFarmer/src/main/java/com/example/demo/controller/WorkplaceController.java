@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import com.example.demo.dto.WorkplaceDTO;
-import com.example.demo.service.WorkplaceService;
+import com.example.demo.service.workplace.WorkplaceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/workplace")
 public class WorkplaceController {
-    private WorkplaceService workplaceService;
 
     @Autowired
-    public WorkplaceController(WorkplaceService workplaceService) {
-        this.workplaceService = workplaceService;
-    }
+    private WorkplaceService workplaceService;
 
     @GetMapping
     public List<WorkplaceDTO> getAllWorkplaces() {
