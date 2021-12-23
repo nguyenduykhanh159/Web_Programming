@@ -19,10 +19,7 @@ public class Product {
    private String name;
 
    @Column(name = "image_url")
-   private String image_url;
-
-   @Column(name = "sale")
-   private String sale;
+   private String imageUrl;
 
    @Column(name = "category")
    private String category;
@@ -39,6 +36,9 @@ public class Product {
 
    @Column(name="quantity")
    private int quantity;
+
+   @Column(name="description")
+   private String description;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<OrderProduct> orders=new HashSet<>();
