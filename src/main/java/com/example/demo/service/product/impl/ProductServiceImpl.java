@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.demo.base.response.BaseResponse;
-import com.example.demo.base.response.ProductResponse;
+import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.dao.ProductRepository;
 import com.example.demo.dto.product.ProductDTO;
 import com.example.demo.entity.Product;
@@ -27,13 +27,19 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public BaseResponse getAllProducts() {
         List<Product> products=productRepository.findAll();
-        return new BaseResponse<>(HttpStatus.OK, "All products",products.stream().map(product->productMapping.mapProductToProductDto(product)).collect(Collectors.toList()));
+        List<ProductDTO> productsDTO=products.stream().map(product->productMapping.mapProductToProductDto(product)).collect(Collectors.toList());
+        return new BaseResponse<>(HttpStatus.OK, "All products",productsDTO);
     }
 
     @Override
     public BaseResponse getProduct(int productId) {
         Product product=productRepository.getById(productId);
-        return new BaseResponse<>(HttpStatus.OK,"Product",productMapping.mapProductToProductDto(product));
+        if(product==null)
+        {
+            return new NotFoundResponse(HttpStatus.NOT_FOUND, "Not found!");
+        }
+        ProductDTO productDTO=productMapping.mapProductToProductDto(product);
+        return new BaseResponse<>(HttpStatus.OK,"Product",productDTO);
     }
 
     @Override
@@ -41,18 +47,18 @@ public class ProductServiceImpl implements ProductService {
         try {
             Product product=productMapping.mapProductDtoToProduct(productDTO);
             productRepository.save(product);
-            return new BaseResponse<>(HttpStatus.OK,"Add success!",productDTO);
+            return new BaseResponse<>(HttpStatus.OK,"Add successfully!",productDTO);
         } catch (Exception e) {
             e.getStackTrace();
         }
-        return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Error!");
+        return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Add failed!");
     }
 
     @Override
     public BaseResponse removeProduct(int productId) {
        try {
            productRepository.deleteById(productId);
-           return new BaseResponse<>(HttpStatus.OK,"Remove success!");
+           return new BaseResponse<>(HttpStatus.OK,"Remove successful!");
        } catch (Exception e) {
             e.getStackTrace();
        }
