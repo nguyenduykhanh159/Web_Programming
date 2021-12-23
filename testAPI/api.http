@@ -50,3 +50,30 @@ Content-Type: application/json
 "established_date":"1999-11-30",
 "industry_code":"NNHV0001"
 }
+
+### Product
+GET  https://{{host}}/product/10 HTTP/1.1
+###
+POST https://{{host}}/product HTTP/1.1
+Content-Type: application/json
+
+{
+    "image_url": "no/url",
+    "category": "rau",
+    "expiration_date": "2021-12-20",
+    "name": "Rau huu co",
+    "price": 500.0,
+    "discount": 0.0,
+    "quantity": 100,
+    "description": "khopng description"
+}
+
+###
+DELETE https://{{host}}/product/10 HTTP/1.1
+///Job service
+
+### Job
+GET https://{{host}}/job/10 HTTP/1.1
+
+
+### JOB by id
