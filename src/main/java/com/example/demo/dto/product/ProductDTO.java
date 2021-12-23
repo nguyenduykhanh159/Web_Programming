@@ -12,16 +12,13 @@ public class ProductDTO {
     private int id;
 
     @JsonProperty("image_url")
-    private String image_url;
-
-    @JsonProperty("sale")
-    private String sale;
+    private String imageUrl;
 
     @JsonProperty("category")
     private String category;
 
     @JsonProperty("expiration_date")
-    private Date expiration_date;
+    private Date expirationDate;
 
     @JsonProperty("name")
     private String name;
@@ -34,4 +31,7 @@ public class ProductDTO {
 
     @JsonProperty("quantity")
     private int quantity;
+
+    @JsonProperty("description")
+    private String description;
 }
