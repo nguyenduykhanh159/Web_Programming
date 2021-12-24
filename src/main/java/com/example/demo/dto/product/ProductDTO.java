@@ -14,6 +14,9 @@ public class ProductDTO {
     @JsonProperty("image_url")
     private String imageUrl;
 
+    @JsonProperty("sale")
+    private int sale;
+
     @JsonProperty("category")
     private String category;
 

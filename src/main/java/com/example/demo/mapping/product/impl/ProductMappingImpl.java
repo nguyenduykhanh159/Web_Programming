@@ -20,6 +20,7 @@ public class ProductMappingImpl implements ProductMapping{
         product.setDescription(productDTO.getDescription());
         product.setDiscount(productDTO.getDiscount());
         product.setImageUrl(productDTO.getImageUrl());
+        product.setSale(productDTO.getSale());
         return product;
     }
 
@@ -35,6 +36,7 @@ public class ProductMappingImpl implements ProductMapping{
         productDTO.setImageUrl(product.getImageUrl());
         productDTO.setDiscount(product.getDiscount());
         productDTO.setId(product.getId());
+        product.setSale(product.getSale());
         return productDTO;
     }
     

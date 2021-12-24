@@ -21,6 +21,9 @@ public class Product {
    @Column(name = "image_url")
    private String imageUrl;
 
+   @Column(name="sale")
+   private int sale;
+
    @Column(name = "category")
    private String category;
    
