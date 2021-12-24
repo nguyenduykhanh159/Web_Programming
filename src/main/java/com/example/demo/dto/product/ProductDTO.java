@@ -17,6 +17,9 @@ public class ProductDTO {
     @JsonProperty("category")
     private String category;
 
+    @JsonProperty("sale")
+    private int sale;
+    
     @JsonProperty("expiration_date")
     private Date expirationDate;
 
