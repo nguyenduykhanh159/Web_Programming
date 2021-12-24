@@ -35,6 +35,7 @@ public class ProductMappingImpl implements ProductMapping{
         productDTO.setImageUrl(product.getImageUrl());
         productDTO.setDiscount(product.getDiscount());
         productDTO.setId(product.getId());
+        productDTO.setSale(product.getSale());
         return productDTO;
     }
     

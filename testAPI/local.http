@@ -42,4 +42,31 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://{{host}}/product/2 HTTP/1.1
+DELETE  http://{{host}}/product/10 HTTP/1.1
+
+
+###
+GET  http://{{host}}/job HTTP/1.1
+
+
+###
+@job_id=100
+GET  http://{{host}}/job/{{job_id}} HTTP/1.1
+
+### Add society
+
+POST  http://{{host}}/job HTTP/1.1
+Content-Type: application/json
+
+{
+        "image_url": "no/ủl",
+        "name": "Gặt lúa",
+        "description": "Cần tuyển người đi Gặt lúa",
+        "address": "Thửa ruộng nhà anh A",
+        "salary": "500.000",
+        "create_At": "2021-12-20",
+        "due": "2022-01-01",
+        "contact": "anh A",
+        "contact_number": "0123456789",
+        "job_detail": "Công việc gồm: gặt lúa, bó lúa và xếp ra xe."
+}
