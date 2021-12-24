@@ -43,9 +43,9 @@ public class ProductServiceImpl implements ProductService {
             productRepository.save(product);
             return new BaseResponse<>(HttpStatus.OK,"Add success!",productDTO);
         } catch (Exception e) {
-            e.getStackTrace();
+
+          return new BaseResponse<>(HttpStatus.BAD_REQUEST,e.getMessage());
         }
-        return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Error!");
     }
 
     @Override
