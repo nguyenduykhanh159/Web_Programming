@@ -42,14 +42,19 @@ public class CustomUserService implements UserDetailsService {
     }
    
     public BaseResponse registerUser(RegisterDTO registerDTO)
+    
     {
-        User user= userMapping.mapUserDtoToUser(registerDTO);
-        if(userRepository.save(user)!=null)
+        try
         {
+            User user= userMapping.mapUserDtoToUser(registerDTO);
+            userRepository.save(user);
             String token=jwtTokenProvider.generateToken(new CustomUserDetails(user));
             return new AuthResponse(HttpStatus.OK,"Register success",user.getUsername(),token);
+        }catch (Exception e)
+        {
+             return new NotFoundResponse(HttpStatus.NOT_FOUND,"Register failed!"+e.getMessage());
         }
-        return new NotFoundResponse(HttpStatus.NOT_FOUND,"Register failed!");
+       
         
     }
 }
