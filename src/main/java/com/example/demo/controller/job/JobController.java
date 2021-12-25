@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 
+@Api(value = "Swagger2DemoRestController", description = "REST Apis related to Student Entity!!!!")
 @RestController
 @RequestMapping("/job")
 public class JobController {
