@@ -26,6 +26,10 @@ Content-Type: application/json
 ### Product
 GET  http://{{host}}/product HTTP/1.1
 Authorization: {{token}}
+
+###
+GET  http://{{host}}/product/10 HTTP/1.1
+
 ### Add product
 POST http://{{host}}/product HTTP/1.1
 Content-Type: application/json

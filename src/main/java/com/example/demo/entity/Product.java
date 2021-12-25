@@ -23,7 +23,7 @@ public class Product {
 
    @Column(name="sale")
    private int sale;
-
+   
    @Column(name = "category")
    private String category;
    
