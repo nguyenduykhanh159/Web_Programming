@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired 
+    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
@@ -26,43 +26,45 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public BaseResponse getAllProducts() {
-        List<Product> products=productRepository.findAll();
-        List<ProductDTO> productsDTO=products.stream().map(product->productMapping.mapProductToProductDto(product)).collect(Collectors.toList());
-        return new BaseResponse<>(HttpStatus.OK, "All products",productsDTO);
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productsDTO = products.stream().map(product -> productMapping.mapProductToProductDto(product))
+                .collect(Collectors.toList());
+        return new BaseResponse<>(HttpStatus.OK, "All products", productsDTO);
     }
 
     @Override
     public BaseResponse getProduct(int productId) {
-        Product product=productRepository.getById(productId);
-        if(product==null)
-        {
-            return new NotFoundResponse(HttpStatus.NOT_FOUND, "Not found!");
+        try {
+            Product product = productRepository.getById(productId);
+            ProductDTO productDTO = productMapping.mapProductToProductDto(product);
+            return new BaseResponse<>(HttpStatus.OK, "Product", productDTO);
+        } catch (Exception e) {
+            return new NotFoundResponse(HttpStatus.NOT_FOUND, "Not found! " + e.getMessage());
         }
-        ProductDTO productDTO=productMapping.mapProductToProductDto(product);
-        return new BaseResponse<>(HttpStatus.OK,"Product",productDTO);
+
     }
 
     @Override
     public BaseResponse addProduct(ProductDTO productDTO) {
         try {
-            Product product=productMapping.mapProductDtoToProduct(productDTO);
+            Product product = productMapping.mapProductDtoToProduct(productDTO);
             productRepository.save(product);
-            return new BaseResponse<>(HttpStatus.OK,"Add successfully!",productDTO);
+            return new BaseResponse<>(HttpStatus.OK, "Add successfully!", productDTO);
         } catch (Exception e) {
-            e.getStackTrace();
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Add failed! " + e.getMessage());
         }
-        return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Add failed!");
+
     }
 
     @Override
     public BaseResponse removeProduct(int productId) {
-       try {
-           productRepository.deleteById(productId);
-           return new BaseResponse<>(HttpStatus.OK,"Remove successful!");
-       } catch (Exception e) {
-            e.getStackTrace();
-       }
-        return new BaseResponse<>(HttpStatus.BAD_REQUEST,"Remove failed!");
+        try {
+            productRepository.deleteById(productId);
+            return new BaseResponse<>(HttpStatus.OK, "Remove successful!");
+        } catch (Exception e) {
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed! " + e.getMessage());
+        }
+
     }
-    
+
 }
