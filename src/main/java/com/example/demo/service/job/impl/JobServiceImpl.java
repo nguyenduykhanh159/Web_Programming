@@ -27,19 +27,20 @@ public class JobServiceImpl implements JobService {
     @Override
     public BaseResponse getAllJobs() {
         List<Job> jobs = jobRepository.findAll();
-        return new BaseResponse<JobDTO>(HttpStatus.OK,"All jobs",jobs.stream().map(job -> jobMapping.mapJobtoJobDTO(job)).collect(Collectors.toList()));
+        return new BaseResponse<JobDTO>(HttpStatus.OK, "All jobs",
+                jobs.stream().map(job -> jobMapping.mapJobtoJobDTO(job)).collect(Collectors.toList()));
     }
 
     @Override
     public BaseResponse getJob(int jobId) {
-        Job job = jobRepository.getById(jobId);
-        if(job!=null)
-        {
-            JobDTO jobDTO=jobMapping.mapJobtoJobDTO(job);
-            return new BaseResponse<JobDTO>(HttpStatus.OK,"All jobs",jobDTO);
+        try {
+            Job job = jobRepository.getById(jobId);
+            JobDTO jobDTO = jobMapping.mapJobtoJobDTO(job);
+            return new BaseResponse<JobDTO>(HttpStatus.OK, "All jobs", jobDTO);
+        } catch (Exception e) {
+            return new NotFoundResponse(HttpStatus.NOT_FOUND, e.getMessage());
         }
-        return new NotFoundResponse(HttpStatus.NOT_FOUND,"Job not found!");
-        
+
     }
 
     @Override
@@ -47,23 +48,23 @@ public class JobServiceImpl implements JobService {
         try {
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
             jobRepository.save(job);
-             return new BaseResponse<JobDTO>(HttpStatus.OK,"Add successfully!",jobMapping.mapJobtoJobDTO(job));
+            return new BaseResponse<JobDTO>(HttpStatus.OK, "Add successfully!", jobMapping.mapJobtoJobDTO(job));
         } catch (Exception e) {
-            e.getStackTrace();
+            return new NotFoundResponse(HttpStatus.BAD_REQUEST, "Add failed! "+e.getMessage());
         }
 
-        return new NotFoundResponse(HttpStatus.BAD_REQUEST,"Add failed!");
+        
     }
 
     @Override
     public BaseResponse removeJob(int jobId) {
         try {
             jobRepository.deleteById(jobId);
-            return new BaseResponse<JobDTO>(HttpStatus.OK,"Remove successfully!");
+            return new BaseResponse<JobDTO>(HttpStatus.OK, "Remove successfully!");
         } catch (Exception e) {
-            e.getStackTrace();
+            return new NotFoundResponse(HttpStatus.BAD_REQUEST, "Remove failed! "+e.getMessage());
         }
-        return new NotFoundResponse(HttpStatus.BAD_REQUEST,"Remove failed!");
+        
     }
 
 }
