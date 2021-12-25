@@ -1,5 +1,6 @@
-package com.example.demo.entity;
+package com.example.demo.entity.job;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,6 +8,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.demo.entity.Workplace;
+import com.example.demo.entity.user.Farmer;
+import com.example.demo.entity.user.FarmerJob;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -32,14 +38,14 @@ public class Job {
    private String name;
 
     @Column(name = "image_url")
-    private String image_url;
+    private String imageUrl;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name="create_At")
+    @Column(name="create_at")
    @Temporal(TemporalType.DATE)
-   private Date create_At;
+   private Date createAt;
 
    @Column(name="salary")
    private float salary;
@@ -48,17 +54,21 @@ public class Job {
    private String contact;
 
    @Column(name = "contact_number")
-   private String contact_number;
+   private String contactNumber;
 
    @Column(name="description")
    private String description; 
 
    @Column(name = "job_detail")
-   private String job_detail;
+   private String jobDetail;
 
    @Column(name="due")
    @Temporal(TemporalType.DATE)
    private Date due;
+ 
+   @Column(name="status")
+   @Enumerated(EnumType.STRING)
+   private JobStatus jobStatus;
 
    //1 job is created by 1 farmer
    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

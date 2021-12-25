@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.order;
 
 import java.util.Date;
 import java.util.HashSet;

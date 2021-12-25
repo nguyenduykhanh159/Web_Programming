@@ -1,10 +1,12 @@
-package com.example.demo.entity;
+package com.example.demo.entity.user;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import com.example.demo.entity.Workplace;
+import com.example.demo.entity.job.Job;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

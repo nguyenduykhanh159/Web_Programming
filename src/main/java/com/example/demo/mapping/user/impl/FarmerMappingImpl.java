@@ -1,7 +1,7 @@
 package com.example.demo.mapping.user.impl;
 
 import com.example.demo.dto.user.FarmerDTO;
-import com.example.demo.entity.Farmer;
+import com.example.demo.entity.user.Farmer;
 import com.example.demo.mapping.user.UserMapping;
 
 import org.springframework.stereotype.Component;

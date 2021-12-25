@@ -2,11 +2,13 @@ package com.example.demo.dto.product;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDTO {
     @JsonProperty("id")
     private int id;

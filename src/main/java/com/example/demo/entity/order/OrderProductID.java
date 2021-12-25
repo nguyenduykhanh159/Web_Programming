@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.order;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

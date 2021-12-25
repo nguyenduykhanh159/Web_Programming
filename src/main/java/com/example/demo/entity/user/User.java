@@ -1,7 +1,9 @@
-package com.example.demo.entity;
+package com.example.demo.entity.user;
 
 
 import javax.persistence.*;
+
+import com.example.demo.entity.order.Order;
 
 import lombok.Data;
 
@@ -12,21 +14,29 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name="phone")
     private String phone;
+
     @Column(name="address")
     private String address;
+
     @Column(name="name")
     private String name;
-    @Column(name="username")
+
+    @Column(name="username",unique = true)
     private String username;
+
     @Column(name="password")
     private String password;
-    @Column(name="email")
+
+    @Column(name="email",unique = true)
     private String email;
+    
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Order> orders=new HashSet<>();
 

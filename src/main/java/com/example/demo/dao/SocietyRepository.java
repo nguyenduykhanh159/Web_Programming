@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.Society;
+import com.example.demo.entity.user.Society;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
