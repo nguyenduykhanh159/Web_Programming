@@ -55,7 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // TODO Auto-generated method stub
 
 
-      http 
+      http
+        .cors()
+        .and()
         .csrf().disable()
         .authorizeRequests()
         .antMatchers("/login","/register").permitAll()
