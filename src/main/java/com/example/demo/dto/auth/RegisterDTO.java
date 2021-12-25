@@ -1,10 +1,14 @@
 package com.example.demo.dto.auth;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegisterDTO {
     
     @JsonProperty("name")
@@ -27,4 +31,7 @@ public class RegisterDTO {
 
     @JsonProperty("phone")
     private String phone;
+
+    @JsonProperty("created_at")
+    private Date createdAt;
 }

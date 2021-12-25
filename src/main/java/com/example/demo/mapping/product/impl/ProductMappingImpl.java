@@ -1,7 +1,7 @@
 package com.example.demo.mapping.product.impl;
 
 import com.example.demo.dto.product.ProductDTO;
-import com.example.demo.entity.Product;
+import com.example.demo.entity.order.Product;
 import com.example.demo.mapping.product.ProductMapping;
 
 import org.springframework.stereotype.Component;

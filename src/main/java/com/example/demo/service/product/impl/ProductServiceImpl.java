@@ -7,7 +7,7 @@ import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.dao.ProductRepository;
 import com.example.demo.dto.product.ProductDTO;
-import com.example.demo.entity.Product;
+import com.example.demo.entity.order.Product;
 import com.example.demo.mapping.product.ProductMapping;
 import com.example.demo.service.product.ProductService;
 

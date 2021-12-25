@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.example.demo.entity.user.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

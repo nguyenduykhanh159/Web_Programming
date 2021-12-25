@@ -7,7 +7,7 @@ import com.example.demo.config.jwt.JwtTokenProvider;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.auth.RegisterDTO;
 import com.example.demo.entity.CustomUserDetails;
-import com.example.demo.entity.User;
+import com.example.demo.entity.user.User;
 import com.example.demo.mapping.user.UserMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;

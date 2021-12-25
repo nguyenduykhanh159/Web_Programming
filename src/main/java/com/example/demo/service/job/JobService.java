@@ -1,7 +1,10 @@
 package com.example.demo.service.job;
 
 
+import java.util.List;
+
 import com.example.demo.base.response.BaseResponse;
+import com.example.demo.dto.job.FarmerJobDTO;
 import com.example.demo.dto.job.JobDTO;
 
 public interface JobService {
@@ -9,6 +12,11 @@ public interface JobService {
     BaseResponse getJob(int jobId);
     BaseResponse addJob(JobDTO jobDTO);
     BaseResponse removeJob(int jobId);
+    BaseResponse assignJob(FarmerJobDTO farmerJobDTO,int jobId);
+    BaseResponse receiveJob(FarmerJobDTO farmerJobDTO,int jobId);
+    BaseResponse completedJob(int jobId);
+    BaseResponse rejectJob(FarmerJobDTO farmerJobDTO,int jobId);
+
 
 
 }

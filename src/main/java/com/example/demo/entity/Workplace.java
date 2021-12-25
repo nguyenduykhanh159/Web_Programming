@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 
+import com.example.demo.entity.job.Job;
+import com.example.demo.entity.user.Farmer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -12,13 +14,14 @@ import java.util.Set;
 @Entity(name = "workplace")
 @Data
 public class Workplace {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
-    @Column(name="type_work")
-   private String typeWork;
+   
    @Column(name="area")
    private float area;
+   
    @Column(name="address")
    private String address;
 

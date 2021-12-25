@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.example.demo.dto.auth.RegisterDTO;
 import com.example.demo.dto.user.UserDTO;
-import com.example.demo.entity.User;
+import com.example.demo.entity.user.User;
 import com.example.demo.mapping.user.UserMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,8 @@ public class UserMappingIml implements UserMapping<User,RegisterDTO> {
         registerDTO.setEmail(user.getEmail());
         registerDTO.setAddress(user.getAddress());
         registerDTO.setPhone(user.getPhone());
-       
+        registerDTO.setCreatedAt(user.getCreatedAt());
+
         return registerDTO;
     }
     

@@ -1,7 +1,9 @@
-package com.example.demo.entity;
+package com.example.demo.entity.user;
 
 
 import javax.persistence.*;
+
+import com.example.demo.entity.order.Order;
 
 import lombok.Data;
 
@@ -38,6 +40,7 @@ public class User {
 
     @Column(name="created_at")
     private Date createdAt;
+    
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Order> orders=new HashSet<>();
 
