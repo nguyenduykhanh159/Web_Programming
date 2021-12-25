@@ -51,17 +51,45 @@ Content-Type: application/json
 "industry_code":"NNHV0001"
 }
 
+### Product
+GET  https://{{host}}/product HTTP/1.1
 ###
 POST https://{{host}}/product HTTP/1.1
 Content-Type: application/json
 
 {
-"image_url": "no/url",
-"category": "",
-"expiration_date": "2021-12-20",
-"name": "Rau huu co",
-"price": 500,
-"discount": 0,
-"quantity": 100,
-"description": "khopng description"
+    "image_url": "no/url",
+    "category": "rau",
+    "expiration_date": "2021-12-20",
+    "name": "Rau huu co",
+    "price": 500.0,
+    "discount": 0.0,
+    "quantity": 100,
+    "description": "khopng description"
+}
+
+###
+DELETE https://{{host}}/product/10 HTTP/1.1
+///Job service
+
+### Job
+GET https://{{host}}/job HTTP/1.1
+
+
+### JOB by id
+
+POST  https://{{host}}/job HTTP/1.1
+Content-Type: application/json
+
+{
+        "image_url": "no/ủl",
+        "name": "Gặt lúa",
+        "description": "Cần tuyển người đi Gặt lúa",
+        "address": "Thửa ruộng nhà anh A",
+        "salary": "500.000",
+        "create_At": "2021-12-20",
+        "due": "2022-01-01",
+        "contact": "anh A",
+        "contact_number": "0123456789",
+        "job_detail": "Công việc gồm: gặt lúa, bó lúa và xếp ra xe."
 }

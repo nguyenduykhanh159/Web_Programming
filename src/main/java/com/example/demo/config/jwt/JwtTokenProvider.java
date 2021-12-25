@@ -17,7 +17,6 @@ import io.jsonwebtoken.UnsupportedJwtException;
 @Component
 public class JwtTokenProvider {
     private static String secret = "quanify";
-    private static int expirationDate = 24 * 60 * 60;
 
     public String generateToken(CustomUserDetails userDetails) {
         try {
