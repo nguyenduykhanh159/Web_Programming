@@ -1,19 +1,9 @@
 @host=localhost:8080/api/v1
-<<<<<<< HEAD
-@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaG5kIiwiaWF0IjoxNjQwNDE0MTI1LCJleHAiOjE2NDA1MDA1MjV9.g4ieNKkyX1exaCOO0DMevLEqlPNL8xi7mHynSNPx16h8ypdr4wsErJ4bHTJHYNqk0n-q9BlX5EBHMGFPgrA5Og
-=======
-
-
-// User API
-
->>>>>>> develop
-### Login
-POST http://{{host}}/login HTTP/1.1
-Content-Type: application/json
+@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFucCIsImlhdCI6MTY0MDQ0Mzg1NywiZXhwIjoxNjQwNTMwMjU3fQ.oL9XdaZhwJETJfPw2MiXv1kwRsLY4qsvJo4JxI5UxLjeAri3jSlyGosARnnqEnsL22OGbgETR1zIClMVGdZX_w
 
 {
-    "username":"khanhnd",
-    "password":"khanhnd"
+    "username":"quanp",
+    "password":"crquan07"
 }
 
 ### Register
@@ -21,15 +11,18 @@ POST  http://{{host}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-"name": "Nguyen Duy Khanh",
-"username": "khanhnd",
-"password": "khanhnd",
-"email": "khanhndctb@gmail.com",
+"name": "Phung Quan",
+"username": "quanp",
+"password": "crquan07",
+"email": "quanp@gmail.com",
 "address": "83 Xa Dan",
-"phone": "0974654701"
+"phone": "0974654701",
+"type":"FARMER",
+"age":22
 }
-
-
+###
+GET http://{{host}}/remove/6 HTTP/1.1
+Authorization: {{token}}
 
 ### add farmer
 POST  http://{{host}}/user/farmer HTTP/1.1
@@ -37,9 +30,9 @@ Content-Type: application/json
 
 {
 "name": "Phung Quan Phung",
-"username": "quan3",
+"username": "quan1",
 "password": "crquan07",
-"email": "quan3@gmail.com",
+"email": "quan1@gmail.com",
 "address": "83 Xa Dan",
 "phone": "0974654701",
 "age": 21
@@ -83,11 +76,13 @@ DELETE  http://{{host}}/product/{{productId}} HTTP/1.1
 
 ### Get all job
 GET  http://{{host}}/job HTTP/1.1
+Authorization: {{token}}
 
 
 ### add a job
 POST  http://{{host}}/job HTTP/1.1
 Content-Type: application/json
+
 
 {
         "image_url": "no/ủl",
@@ -126,7 +121,7 @@ Content-Type: application/json
 
  {
       "job_id": 2,
-      "worker_id": 2,
+      "worker_id": 4,
       "deal_price": 300000.0,
       "comment": "Nhanh chong, hieu qua, chat luong",
       "received_at": "2021-12-25T10:41:14.596+00:00",
@@ -138,7 +133,7 @@ POST  http://{{host}}/job/receiveJob/{{job_id}}
 Content-Type: application/json
 
 {
-    "worker_id":3,
+    "worker_id":4,
     "deal_price":300000,
     "comment":"Nhanh chong, hieu qua, chat luong"
 }

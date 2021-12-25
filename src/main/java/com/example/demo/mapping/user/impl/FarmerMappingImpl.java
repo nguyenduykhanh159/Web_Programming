@@ -1,16 +1,16 @@
 package com.example.demo.mapping.user.impl;
-
-import com.example.demo.dto.user.FarmerDTO;
+import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.mapping.user.UserMapping;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class FarmerMappingImpl implements UserMapping<Farmer,FarmerDTO>  {
+public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
+
 
     @Override
-    public Farmer mapUserDtoToUser(FarmerDTO userDTO) {
+    public Farmer mapUserDtoToUser(UserDTO userDTO) {
         // TODO Auto-generated method stub
         Farmer farmer = new Farmer();
         farmer.setName(userDTO.getName());
@@ -24,8 +24,8 @@ public class FarmerMappingImpl implements UserMapping<Farmer,FarmerDTO>  {
     }
 
     @Override
-    public FarmerDTO mapUserToUserDto(Farmer user) {
-       FarmerDTO farmer = new FarmerDTO();
+    public UserDTO mapUserToUserDto(Farmer user) {
+       UserDTO farmer = new UserDTO();
         farmer.setName(user.getName());
         farmer.setAddress(user.getAddress());
         farmer.setUsername(user.getUsername());

@@ -1,6 +1,6 @@
 package com.example.demo.mapping.user.impl;
 
-import com.example.demo.dto.user.SocietyDTO;
+import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.user.Society;
 import com.example.demo.mapping.user.UserMapping;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class SocietyMappingImpl implements UserMapping<Society,SocietyDTO> {
+public class SocietyMappingImpl implements UserMapping<Society,UserDTO> {
 
     @Override
-    public Society mapUserDtoToUser(SocietyDTO userDTO) {
+    public Society mapUserDtoToUser(UserDTO userDTO) {
         
          Society society = new Society();
         society.setName(userDTO.getName());
@@ -27,9 +27,9 @@ public class SocietyMappingImpl implements UserMapping<Society,SocietyDTO> {
     }
 
     @Override
-    public SocietyDTO mapUserToUserDto(Society user) {
+    public UserDTO mapUserToUserDto(Society user) {
       
-        SocietyDTO society=new SocietyDTO();
+        UserDTO society=new UserDTO();
         society.setName(user.getName());
         society.setAddress(user.getAddress());
         society.setUsername(user.getUsername());

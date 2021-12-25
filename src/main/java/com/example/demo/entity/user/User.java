@@ -5,6 +5,8 @@ import javax.persistence.*;
 
 import com.example.demo.entity.order.Order;
 
+import org.hibernate.annotations.OnDelete;
+
 import lombok.Data;
 
 import java.util.Date;
