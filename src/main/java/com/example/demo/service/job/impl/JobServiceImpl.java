@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
 
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
@@ -15,6 +16,7 @@ import com.example.demo.dao.JobRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.job.FarmerJobDTO;
 import com.example.demo.dto.job.JobDTO;
+import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.Workplace;
 import com.example.demo.entity.job.Job;
 import com.example.demo.entity.job.JobStatus;
@@ -28,6 +30,7 @@ import com.example.demo.service.job.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,6 +44,12 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private JobMapping jobMapping;
+
+    @Autowired
+    private FarmerRepository farmerRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public BaseResponse getAllJobs() {
@@ -62,15 +71,26 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public BaseResponse addJob(JobDTO jobDTO) {
+    public BaseResponse createJob(JobDTO jobDTO) {
         try {
+
+            /*
+            Get user info
+            */
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+
+            
+            User user = userRepository.getById(userDetails.getUser().getId());
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
-            job.setCreateAt(new Date());
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
             workplace.setArea(jobDTO.getArea());
+            job.setCreateAt(new Date());
             job.setWorkplace(workplace);
+            job.setOwner(user);
             jobRepository.save(job);
+
             return new BaseResponse<JobDTO>(HttpStatus.OK, "Add successfully!", jobMapping.mapJobtoJobDTO(job));
         } catch (Exception e) {
             return new NotFoundResponse(HttpStatus.BAD_REQUEST, "Add failed! " + e.getMessage());
@@ -116,13 +136,19 @@ public class JobServiceImpl implements JobService {
     public BaseResponse receiveJob(FarmerJobDTO farmerJobDTO, int jobId) {
 
         try {
-            FarmerJobID fjId = new FarmerJobID(jobId, farmerJobDTO.getWorkerId());
+
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+
+
+            FarmerJobID fjId = new FarmerJobID(jobId, userDetails.getUser().getId());
             FarmerJob farmerJob = new FarmerJob();
             farmerJob.setFarmerJobID(fjId);
             farmerJob.setReceivedAt(new Date());
             farmerJob.setComment(farmerJobDTO.getComment());
             farmerJob.setDealPrice(farmerJobDTO.getDealPrice());
             farmerJob.setStatus(FarmerJobStatus.REQUESTING);
+
             fJobRepository.save(farmerJob);
 
             farmerJobDTO.setJobId(jobId);
@@ -130,6 +156,7 @@ public class JobServiceImpl implements JobService {
             farmerJobDTO.setStatus(farmerJob.getStatus().toString());
 
             return new BaseResponse<>(HttpStatus.OK, "Receive job successful!", farmerJobDTO);
+
         } catch (Exception ex) {
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Receive failed! " + ex.getMessage());
 
