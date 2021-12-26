@@ -1,4 +1,4 @@
-package com.example.demo.dto.user;
+package com.example.demo.dto.auth;
 
 import java.util.Date;
 
@@ -9,8 +9,8 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDTO {
-
+public class RegisterDTO {
+    
     @JsonProperty("name")
     private String name;
 
@@ -19,6 +19,9 @@ public class UserDTO {
 
     @JsonProperty("password")
     private String password;
+
+    @JsonProperty("password_confirmation")
+    private String passwordComfirmation;
 
     @JsonProperty("email")
     private String email;
@@ -29,21 +32,6 @@ public class UserDTO {
     @JsonProperty("phone")
     private String phone;
 
-    @JsonProperty("type")
-    private String type;
-
     @JsonProperty("created_at")
     private Date createdAt;
-    
-    @JsonProperty("age")
-    private Integer age;
-
-    @JsonProperty("industry_code")
-    private String industryCode;
-
-    @JsonProperty("established_date")
-    private Date establishedDate;
-
-    @JsonProperty("total_capital")
-    private float totalCapital;
 }

@@ -12,13 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-// import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
 
 @Entity(name="role")
 @Data
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
