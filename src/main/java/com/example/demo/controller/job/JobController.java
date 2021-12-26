@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 @RestController
 @RequestMapping("/job")
 public class JobController {
@@ -41,7 +42,7 @@ public class JobController {
     @PostMapping
     public BaseResponse addJob(@RequestBody JobDTO job) {
         
-        return jobService.addJob(job);
+        return jobService.createJob(job);
     }
 
     @DeleteMapping("/{id}")

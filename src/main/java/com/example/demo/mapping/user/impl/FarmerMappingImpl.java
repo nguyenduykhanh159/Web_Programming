@@ -1,4 +1,6 @@
 package com.example.demo.mapping.user.impl;
+import java.util.Date;
+
 import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.mapping.user.UserMapping;
@@ -20,6 +22,7 @@ public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
         farmer.setPhone(userDTO.getPhone());
         farmer.setEmail(userDTO.getEmail());
         farmer.setAge(userDTO.getAge());
+        farmer.setCreatedAt(userDTO.getCreatedAt()!=null?userDTO.getCreatedAt():new Date());
         return farmer;
     }
 
@@ -33,6 +36,7 @@ public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
         farmer.setPhone(user.getPhone());
         farmer.setEmail(user.getEmail());
         farmer.setAge(user.getAge()); 
+        farmer.setCreatedAt(user.getCreatedAt());
         return farmer;
     }
 

@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/login","/register").permitAll()
+        .antMatchers("/login","/register","/swagger-ui.html").permitAll()
         .anyRequest().authenticated().and()
         .exceptionHandling().authenticationEntryPoint(jwtTokenEntryPoint).and();
 
@@ -73,7 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source =
             new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");

@@ -1,5 +1,7 @@
 package com.example.demo.service.user;
 
+import javax.persistence.EntityManager;
+
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.base.response.auth.AuthResponse;
@@ -49,6 +51,8 @@ public class CustomUserService implements UserDetailsService, UserService {
     @Autowired 
     private AuthenticationManager authenticationManager;
 
+   
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -69,6 +73,7 @@ public class CustomUserService implements UserDetailsService, UserService {
             String userType = userDTO.getType().toUpperCase();
             if (UserType.valueOf(userType) == UserType.FARMER) {
                 Farmer farmer = farmerMapping.mapUserDtoToUser(userDTO);
+
                 userRepository.save(farmer);
                 token = jwtTokenProvider.generateToken(new CustomUserDetails(farmer));
             } else if (UserType.valueOf(userType) == UserType.SOCIETY) {
