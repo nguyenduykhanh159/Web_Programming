@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class WorkplaceDTO {
+    
     @JsonProperty("address")
     private String address;
 

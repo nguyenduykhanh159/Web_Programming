@@ -1,7 +1,8 @@
 package com.example.demo.mapping.job.impl;
 
 import com.example.demo.dto.job.JobDTO;
-import com.example.demo.entity.Job;
+import com.example.demo.entity.job.Job;
+import com.example.demo.entity.job.JobStatus;
 import com.example.demo.mapping.job.JobMapping;
 
 import org.springframework.stereotype.Component;
@@ -14,15 +15,16 @@ public class JobMappingImpl implements JobMapping {
         Job job=new Job();
         job.setName(jobDTO.getName());
         job.setId(jobDTO.getId());
-        job.setImage_url(jobDTO.getImage_url());
+        job.setImageUrl(jobDTO.getImageUrl());
         job.setAddress(jobDTO.getAddress());
-        job.setCreate_At(jobDTO.getCreate_At());
+        job.setCreateAt(jobDTO.getCreatedAt());
         job.setContact(jobDTO.getContact());
-        job.setContact_number(jobDTO.getContact_number());
-        job.setJob_detail(jobDTO.getJob_detail());
+        job.setContactNumber(jobDTO.getContactNumber());
+        job.setJobDetail(jobDTO.getJobDetail());
         job.setSalary(jobDTO.getSalary());
         job.setDescription(jobDTO.getDescription());
         job.setDue(jobDTO.getDue());
+        job.setJobStatus(JobStatus.FINDING);
         return job;
     }
 
@@ -31,15 +33,17 @@ public class JobMappingImpl implements JobMapping {
         JobDTO jobDTO=new JobDTO();
         jobDTO.setName(job.getName());
         jobDTO.setId(job.getId());
-        jobDTO.setImage_url(job.getImage_url());
+        jobDTO.setImageUrl(job.getImageUrl());
         jobDTO.setAddress(job.getAddress());
-        jobDTO.setCreate_At(job.getCreate_At());
+        jobDTO.setCreatedAt(job.getCreateAt());
         jobDTO.setContact(job.getContact());
-        jobDTO.setContact_number(job.getContact_number());
-        jobDTO.setJob_detail(job.getJob_detail());
+        jobDTO.setContactNumber(job.getContactNumber());
+        jobDTO.setJobDetail(job.getJobDetail());
         jobDTO.setSalary(job.getSalary());
         jobDTO.setDescription(job.getDescription());
         jobDTO.setDue(job.getDue());
+        jobDTO.setArea(job.getWorkplace().getArea());
+        jobDTO.setJobStatus(job.getJobStatus().toString());
         return jobDTO;
        
     }

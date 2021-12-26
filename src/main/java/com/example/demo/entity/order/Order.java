@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.entity.order;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.example.demo.entity.user.User;
 
 import lombok.Data;
 

@@ -8,10 +8,10 @@ import com.example.demo.dao.FarmerRepository;
 import com.example.demo.dao.FarmerSocietyRepository;
 import com.example.demo.dao.SocietyRepository;
 import com.example.demo.dto.user.FarmerDTO;
-import com.example.demo.entity.Farmer;
-import com.example.demo.entity.FarmerSociety;
-import com.example.demo.entity.FarmerSocietyID;
-import com.example.demo.entity.Society;
+import com.example.demo.entity.user.Farmer;
+import com.example.demo.entity.user.FarmerSociety;
+import com.example.demo.entity.user.FarmerSocietyID;
+import com.example.demo.entity.user.Society;
 import com.example.demo.mapping.user.UserMapping;
 import com.example.demo.service.user.FarmerService;
 
