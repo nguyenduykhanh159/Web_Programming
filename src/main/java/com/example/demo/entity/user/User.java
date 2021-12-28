@@ -3,6 +3,7 @@ package com.example.demo.entity.user;
 
 import javax.persistence.*;
 
+import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Order;
 
 import org.hibernate.annotations.OnDelete;
@@ -49,4 +50,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name="user_role",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<Role> authorities=new HashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 }
