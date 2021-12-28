@@ -2,7 +2,7 @@ package com.example.demo.service.workplace.impl;
 
 import java.util.List;
 
-import com.example.demo.dto.WorkplaceDTO;
+import com.example.demo.dto.workplace.WorkplaceDTO;
 import com.example.demo.service.WorkplaceService;
 
 import org.springframework.stereotype.Service;

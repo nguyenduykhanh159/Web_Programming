@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.WorkplaceDTO;
-
 import java.util.List;
+
+import com.example.demo.dto.workplace.WorkplaceDTO;
 
 
 public interface WorkplaceService {
