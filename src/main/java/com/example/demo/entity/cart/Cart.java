@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 
 import com.example.demo.entity.order.Product;
 import com.example.demo.entity.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -30,9 +31,11 @@ public class Cart {
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name = "cart_product",joinColumns = @JoinColumn(name="cart_id"),inverseJoinColumns = @JoinColumn(name="product_id"))
+    @JsonIgnore
     private Set<Product> products=new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",unique = true)
+    @JsonIgnore
     private User user;
 }

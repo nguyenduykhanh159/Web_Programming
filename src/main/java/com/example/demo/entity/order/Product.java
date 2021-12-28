@@ -6,6 +6,9 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.example.demo.entity.cart.Cart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity(name="product")
@@ -44,5 +47,10 @@ public class Product {
    private String description;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<OrderProduct> orders=new HashSet<>();
+
+    // @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    // @JsonIgnore
+    // private Set<Cart> carts;
 }

@@ -6,12 +6,14 @@ import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.base.response.auth.AuthResponse;
 import com.example.demo.config.jwt.JwtTokenProvider;
+import com.example.demo.dao.CartRepository;
 import com.example.demo.dao.FarmerRepository;
 import com.example.demo.dao.SocietyRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.auth.RegisterDTO;
 import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.CustomUserDetails;
+import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.entity.user.Society;
 import com.example.demo.entity.user.User;
@@ -41,6 +43,9 @@ public class CustomUserService implements UserDetailsService, UserService {
 
     @Autowired
     private UserMapping<Society, UserDTO> societyMapping;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -73,11 +78,14 @@ public class CustomUserService implements UserDetailsService, UserService {
             String userType = userDTO.getType().toUpperCase();
             if (UserType.valueOf(userType) == UserType.FARMER) {
                 Farmer farmer = farmerMapping.mapUserDtoToUser(userDTO);
-
+                Cart cart=new Cart();
+                cart.setUser(farmer);
+                cartRepository.save(cart);
                 userRepository.save(farmer);
                 token = jwtTokenProvider.generateToken(new CustomUserDetails(farmer));
             } else if (UserType.valueOf(userType) == UserType.SOCIETY) {
                 Society society = societyMapping.mapUserDtoToUser(userDTO);
+                society.setCart(new Cart());
                 userRepository.save(society);
                 token = jwtTokenProvider.generateToken(new CustomUserDetails(society));
             }

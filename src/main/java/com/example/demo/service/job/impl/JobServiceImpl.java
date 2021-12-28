@@ -86,7 +86,7 @@ public class JobServiceImpl implements JobService {
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
             workplace.setArea(jobDTO.getArea());
-            job.setCreateAt(new Date());
+            job.setCreatedAt(new Date());
             job.setWorkplace(workplace);
             job.setOwner(user);
             jobRepository.save(job);

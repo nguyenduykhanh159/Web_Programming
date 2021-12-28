@@ -17,7 +17,7 @@ public class JobMappingImpl implements JobMapping {
         job.setId(jobDTO.getId());
         job.setImageUrl(jobDTO.getImageUrl());
         job.setAddress(jobDTO.getAddress());
-        job.setCreateAt(jobDTO.getCreatedAt());
+        job.setCreatedAt(jobDTO.getCreatedAt());
         job.setContact(jobDTO.getContact());
         job.setContactNumber(jobDTO.getContactNumber());
         job.setJobDetail(jobDTO.getJobDetail());
@@ -35,7 +35,7 @@ public class JobMappingImpl implements JobMapping {
         jobDTO.setId(job.getId());
         jobDTO.setImageUrl(job.getImageUrl());
         jobDTO.setAddress(job.getAddress());
-        jobDTO.setCreatedAt(job.getCreateAt());
+        jobDTO.setCreatedAt(job.getCreatedAt());
         jobDTO.setContact(job.getContact());
         jobDTO.setContactNumber(job.getContactNumber());
         jobDTO.setJobDetail(job.getJobDetail());

@@ -46,7 +46,7 @@ public class Job {
 
     @Column(name="create_at")
    @Temporal(TemporalType.DATE)
-   private Date createAt;
+   private Date createdAt;
 
    @Column(name="salary")
    private float salary;
