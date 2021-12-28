@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 import com.example.demo.entity.Workplace;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.entity.user.FarmerJob;
+import com.example.demo.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -74,7 +75,7 @@ public class Job {
    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
    @JsonIgnore
    @JoinColumn(name="owner_id")
-    private Farmer owner;
+    private User owner;
   
     //1 job can have n contacts 
     @OneToMany(mappedBy = "job")

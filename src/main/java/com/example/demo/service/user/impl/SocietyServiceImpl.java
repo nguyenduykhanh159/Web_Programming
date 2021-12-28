@@ -4,22 +4,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.demo.base.response.BaseResponse;
 import com.example.demo.dao.FarmerRepository;
 import com.example.demo.dao.FarmerSocietyRepository;
 import com.example.demo.dao.SocietyRepository;
-import com.example.demo.dto.user.SocietyDTO;
+import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.entity.user.FarmerSociety;
 import com.example.demo.entity.user.FarmerSocietyID;
 import com.example.demo.entity.user.Society;
 import com.example.demo.mapping.user.UserMapping;
-import com.example.demo.service.user.SocietyService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SocietyServiceImpl implements SocietyService {
+public class SocietyServiceImpl  {
 
     @Autowired
     private SocietyRepository societyRepository;
@@ -31,33 +33,41 @@ public class SocietyServiceImpl implements SocietyService {
     private FarmerSocietyRepository fsRepository;
 
     @Autowired
-    private UserMapping<Society, SocietyDTO> societyMapping;
+    private UserMapping<Society, UserDTO> societyMapping;
 
-    @Override
-    public List<SocietyDTO> getAll() {
+  
+    public List<UserDTO> getAll() {
 
         List<Society> societies = societyRepository.findAll();
         return societies.stream().map(society -> societyMapping.mapUserToUserDto(society)).collect(Collectors.toList());
     }
 
-    @Override
-    public SocietyDTO getUser(int userId) {
+  
+    public UserDTO getUser(int userId) {
 
         Society society = societyRepository.getById(userId);
         return societyMapping.mapUserToUserDto(society);
     }
 
-    @Override
-    public boolean addUser(SocietyDTO userDTO) {
+   
+    public BaseResponse addUser(UserDTO userDTO) {
         // TODO Auto-generated method stub
-        Society society = societyMapping.mapUserDtoToUser(userDTO);
-        if (societyRepository.save(society) != null) {
-            return true;
+        try
+        {
+            Society society = societyMapping.mapUserDtoToUser(userDTO);
+            societyRepository.save(society) ;
+
+            userDTO.setCreatedAt(society.getCreatedAt());
+            return new BaseResponse<>(HttpStatus.OK, "Register successful!",userDTO);
+        }catch(Exception ex)
+        {
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Register failed!");
         }
-        return false;
+        
+        
     }
 
-    @Override
+  
     public boolean removeUser(int userId) {
         try {
             societyRepository.deleteById(userId);
@@ -68,7 +78,7 @@ public class SocietyServiceImpl implements SocietyService {
         return false;
     }
 
-    @Override
+  
     public boolean addSocietyToFarmer(int societyid, int farmerid) {
         try {
             Farmer farmer = farmerRepository.getById(farmerid);
