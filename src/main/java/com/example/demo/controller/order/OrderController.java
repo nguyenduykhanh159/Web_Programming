@@ -9,6 +9,7 @@ import com.example.demo.dto.cart.CartDTO;
 import com.example.demo.dto.cart.CartProductDTO;
 import com.example.demo.dto.order.OrderDTO;
 import com.example.demo.dto.order.OrderProductDTO;
+import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Order;
 import com.example.demo.entity.order.OrderProduct;
 import com.example.demo.service.order.OrderService;
@@ -36,7 +37,7 @@ public class OrderController {
     private ModelMapper modelMapper;
 
     @PostMapping
-    public BaseResponse placeOrder(@RequestBody List<CartProductDTO> cartDto) {
+    public BaseResponse placeOrder(@RequestBody CartDTO cartDto) {
 
         return orderService.placeOrder(cartDto);
     }

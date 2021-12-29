@@ -3,12 +3,15 @@ package com.example.demo.dto.order;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.JoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
 
@@ -17,4 +20,7 @@ public class OrderDTO {
 
     @JsonProperty("products")
     private Collection<OrderProductDTO> products;
+
+    @JsonProperty("total_amount")
+    private Float totalAmount;
 }

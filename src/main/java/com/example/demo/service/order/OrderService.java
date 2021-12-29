@@ -8,6 +8,6 @@ import com.example.demo.dto.cart.CartProductDTO;
 import com.example.demo.dto.order.OrderDTO;
 
 public interface OrderService {
-    BaseResponse placeOrder(List<CartProductDTO> cartDto);
+    BaseResponse placeOrder(CartDTO cartDto);
     BaseResponse getOrderInfo();
 }

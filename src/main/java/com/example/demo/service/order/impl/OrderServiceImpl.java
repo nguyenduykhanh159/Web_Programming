@@ -18,6 +18,7 @@ import com.example.demo.dto.order.OrderDTO;
 import com.example.demo.dto.order.OrderProductDTO;
 import com.example.demo.dto.product.ProductDTO;
 import com.example.demo.entity.CustomUserDetails;
+import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Order;
 import com.example.demo.entity.order.OrderProduct;
 import com.example.demo.entity.order.OrderProductID;
@@ -46,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
     private UserRepository userRepository;
 
     @Override
-    public BaseResponse placeOrder(List<CartProductDTO> cartDto) {
+    public BaseResponse placeOrder(CartDTO cartDto) {
         try {
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
@@ -56,13 +57,15 @@ public class OrderServiceImpl implements OrderService {
             Order order = new Order();
             order.setCreatedAt(new Date());
             order.setUser(user);
+            order.setTotalAmount(cartDto.getTotalAmount());
             orderRepository.save(order);
            
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setCreatedAt(order.getCreatedAt());
             orderDTO.setProducts(new ArrayList<>());
+            orderDTO.setTotalAmount(cartDto.getTotalAmount());
 
-            for (CartProductDTO cartProductDto : cartDto) {
+            for (CartProductDTO cartProductDto : cartDto.getCart()) {
                 OrderProductID odid = new OrderProductID(order.getId(), cartProductDto.getId());
                 Product product = productRepository.getById(cartProductDto.getId());
                 OrderProduct orderProduct = new OrderProduct();

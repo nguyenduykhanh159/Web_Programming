@@ -1,6 +1,7 @@
 package com.example.demo.mapping.cart.Impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class CartMappingImpl implements CartMapping {
 
     public Order mapCartToOrder(CartDTO cartDTO)
     {
-        Set<CartProductDTO> products= cartDTO.getCarts();
+        Collection<CartProductDTO> products= cartDTO.getCart();
         Order order =new Order();
         for(CartProductDTO cartProductDTO: products)
         {

@@ -179,7 +179,9 @@ POST http://{{host}}/order HTTP/1.1
 Content-Type: application/json
 Authorization: {{token}}
 
-[
+{
+  "total_amount":10000,
+  "cart":[
     {
       "product_id": 1,
       "name": "quoc sat",
@@ -210,8 +212,8 @@ Authorization: {{token}}
       "discount": 40.0,
       "sale": 400.0
     }
-    
-]
+  ]   
+}
 
 ###
 GET http://{{host}}/order HTTP/1.1
