@@ -22,7 +22,6 @@ public class UserDTO {
     @JsonProperty("username")
     private String username;
 
-    @JsonIgnore
     @JsonProperty(value = "password")
     private String password;
 
