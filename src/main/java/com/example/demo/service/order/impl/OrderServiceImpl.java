@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
 
-            User user = userRepository.getById(userDetails.getUser().getId());
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
 
             Order order = new Order();
             order.setCreatedAt(new Date());
@@ -97,8 +97,8 @@ public class OrderServiceImpl implements OrderService {
         try {
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
 
-            User user = userRepository.getById(userDetails.getUser().getId());
             Collection<Order> orders = user.getOrders();
             List<OrderDTO> orderDTOs = new ArrayList<>();
             for (Order order : orders) {

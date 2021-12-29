@@ -91,7 +91,8 @@ public class JobServiceImpl implements JobService {
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
                     
-            User user = userRepository.getById(userDetails.getUser().getId());
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
+
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
 
             Workplace workplace = new Workplace();
@@ -151,8 +152,9 @@ public class JobServiceImpl implements JobService {
 
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
-
-            FarmerJobID fjId = new FarmerJobID(jobId, userDetails.getUser().getId());
+            User user=userRepository.findById(userDetails.getUser().getId()).get();
+            
+            FarmerJobID fjId = new FarmerJobID(jobId, user.getId());
             FarmerJob farmerJob = new FarmerJob();
             farmerJob.setFarmerJobID(fjId);
             farmerJob.setReceivedAt(new Date());
