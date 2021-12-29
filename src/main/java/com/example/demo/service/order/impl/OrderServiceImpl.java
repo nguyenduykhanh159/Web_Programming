@@ -77,9 +77,9 @@ public class OrderServiceImpl implements OrderService {
 
                 // Return value
                 OrderProductDTO productDTO = OrderProductDTO.builder()
-                        .name(cartProductDto.getName())
-                        .price(cartProductDto.getPrice())
-                        .quantity(cartProductDto.getQuantity())
+                        .name(product.getName())
+                        .price(product.getPrice())
+                        .quantity(product.getQuantity())
                         .build();
                 orderDTO.getProducts().add(productDTO);
             }
