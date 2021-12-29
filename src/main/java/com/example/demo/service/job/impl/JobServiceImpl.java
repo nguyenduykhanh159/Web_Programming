@@ -1,13 +1,10 @@
 package com.example.demo.service.job.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
@@ -21,7 +18,6 @@ import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.Workplace;
 import com.example.demo.entity.job.Job;
 import com.example.demo.entity.job.JobStatus;
-import com.example.demo.entity.user.Farmer;
 import com.example.demo.entity.user.FarmerJob;
 import com.example.demo.entity.user.FarmerJobID;
 import com.example.demo.entity.user.FarmerJobStatus;
@@ -46,8 +42,6 @@ public class JobServiceImpl implements JobService {
     @Autowired
     private JobMapping jobMapping;
 
-    @Autowired
-    private FarmerRepository farmerRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -55,7 +49,7 @@ public class JobServiceImpl implements JobService {
     @Override
     public BaseResponse getAllJobs() {
         List<Job> jobs = jobRepository.findAll();
-        List<JobDTO> jobDTOs = new ArrayList();
+        List<JobDTO> jobDTOs = new ArrayList<>();
         for (Job job : jobs) {
             JobDTO jobDTO = JobDTO.builder()
                     .id(job.getId())
@@ -94,14 +88,11 @@ public class JobServiceImpl implements JobService {
     public BaseResponse createJob(JobDTO jobDTO) {
         try {
 
-            /*
-             * Get user info
-             */
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
-
             User user = userRepository.getById(userDetails.getUser().getId());
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
+
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
             workplace.setArea(jobDTO.getArea());

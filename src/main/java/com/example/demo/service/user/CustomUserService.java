@@ -1,5 +1,6 @@
 package com.example.demo.service.user;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -88,12 +89,19 @@ public class CustomUserService implements UserDetailsService, UserService {
                 Farmer farmer = farmerMapping.mapUserDtoToUser(userDTO);
                 Cart cart = new Cart();
                 cart.setUser(farmer);
+                cart.setProducts(new ArrayList<>());
+
                 cartRepository.save(cart);
                 userRepository.save(farmer);
                 token = jwtTokenProvider.generateToken(new CustomUserDetails(farmer));
             } else if (UserType.valueOf(userType) == UserType.SOCIETY) {
                 Society society = societyMapping.mapUserDtoToUser(userDTO);
-                society.setCart(new Cart());
+                Cart cart = new Cart();
+                cart.setUser(society);
+                cart.setProducts(new ArrayList<>());
+
+                cartRepository.save(cart);
+                society.setCart(cart);
                 userRepository.save(society);
                 token = jwtTokenProvider.generateToken(new CustomUserDetails(society));
             }
