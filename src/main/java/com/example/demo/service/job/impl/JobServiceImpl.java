@@ -1,5 +1,6 @@
 package com.example.demo.service.job.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -54,8 +55,27 @@ public class JobServiceImpl implements JobService {
     @Override
     public BaseResponse getAllJobs() {
         List<Job> jobs = jobRepository.findAll();
-        return new BaseResponse<JobDTO>(HttpStatus.OK, "All jobs",
-                jobs.stream().map(job -> jobMapping.mapJobtoJobDTO(job)).collect(Collectors.toList()));
+        List<JobDTO> jobDTOs = new ArrayList();
+        for (Job job : jobs) {
+            JobDTO jobDTO = JobDTO.builder()
+                    .id(job.getId())
+                    .imageUrl(job.getImageUrl())
+                    .address(job.getAddress())
+                    .description(job.getDescription())
+                    .createdAt(job.getCreatedAt())
+                    .contact(job.getContact())
+                    .contactNumber(job.getContactNumber())
+                    .due(job.getDue())
+                    .salary(job.getSalary())
+                    .jobDetail(job.getJobDetail())
+                    .jobStatus(job.getJobStatus().toString())
+                    .build();
+            jobDTOs.add(jobDTO);
+
+        }
+        return new BaseResponse<>(HttpStatus.OK, "All jobs", jobDTOs);
+        // jobs.stream().map(job ->
+        // jobMapping.mapJobtoJobDTO(job)).collect(Collectors.toList()));
     }
 
     @Override
@@ -75,12 +95,11 @@ public class JobServiceImpl implements JobService {
         try {
 
             /*
-            Get user info
-            */
+             * Get user info
+             */
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
 
-            
             User user = userRepository.getById(userDetails.getUser().getId());
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
             Workplace workplace = new Workplace();
@@ -139,7 +158,6 @@ public class JobServiceImpl implements JobService {
 
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
-
 
             FarmerJobID fjId = new FarmerJobID(jobId, userDetails.getUser().getId());
             FarmerJob farmerJob = new FarmerJob();

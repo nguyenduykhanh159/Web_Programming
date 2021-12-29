@@ -7,12 +7,13 @@ import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.OnDelete;
-
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name="usez")
@@ -46,15 +47,12 @@ public class User {
     private Date createdAt;
     
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Order> orders=new HashSet<>();
+    private Collection<Order> orders;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name="user_role",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
-    @JsonIgnore
-    private Set<Role> authorities=new HashSet<>();
+    private Collection<Role> authorities;
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
     private Cart cart;
 }

@@ -1,10 +1,13 @@
 package com.example.demo.service.user;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 
+import com.example.demo.base.response.AuthenticationModel;
+import com.example.demo.base.response.AuthenticationResponse;
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
-import com.example.demo.base.response.auth.AuthResponse;
 import com.example.demo.config.jwt.JwtTokenProvider;
 import com.example.demo.dao.CartRepository;
 import com.example.demo.dao.FarmerRepository;
@@ -53,10 +56,8 @@ public class CustomUserService implements UserDetailsService, UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired 
+    @Autowired
     private AuthenticationManager authenticationManager;
-
-   
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -74,11 +75,18 @@ public class CustomUserService implements UserDetailsService, UserService {
     {
         try {
             String token = null;
+            UserDTO user_respose=UserDTO.builder()
+                                        .name(userDTO.getName())
+                                        .address(userDTO.getAddress())
+                                        .email(userDTO.getEmail())
+                                        .phone(userDTO.getPhone())
+                                        .createdAt(new Date()).build();
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             String userType = userDTO.getType().toUpperCase();
+
             if (UserType.valueOf(userType) == UserType.FARMER) {
                 Farmer farmer = farmerMapping.mapUserDtoToUser(userDTO);
-                Cart cart=new Cart();
+                Cart cart = new Cart();
                 cart.setUser(farmer);
                 cartRepository.save(cart);
                 userRepository.save(farmer);
@@ -89,7 +97,10 @@ public class CustomUserService implements UserDetailsService, UserService {
                 userRepository.save(society);
                 token = jwtTokenProvider.generateToken(new CustomUserDetails(society));
             }
-            return new AuthResponse(HttpStatus.OK, "Register success", userDTO.getUsername(), token);
+            AuthenticationModel authenticationModel = new AuthenticationModel();
+            authenticationModel.setUser(user_respose);
+            authenticationModel.setToken(token);
+            return new AuthenticationResponse(HttpStatus.OK, "Register success",authenticationModel);
         } catch (Exception e) {
             return new NotFoundResponse(HttpStatus.NOT_FOUND, "Register failed!" + e.getMessage());
         }
@@ -103,16 +114,16 @@ public class CustomUserService implements UserDetailsService, UserService {
     }
 
     @Override
-	public BaseResponse removeUser(int userId) {
-		
+    public BaseResponse removeUser(int userId) {
+
         try {
             userRepository.deleteById(userId);
             return new BaseResponse<>(HttpStatus.OK, "Remove successful!");
         } catch (Exception e) {
-            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed!"+e.getMessage());
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed!" + e.getMessage());
         }
-		
-	}
+
+    }
 
     @Override
     public BaseResponse login(UserDTO userDTO) {
@@ -120,8 +131,12 @@ public class CustomUserService implements UserDetailsService, UserService {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
             String token = jwtTokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-            return new AuthResponse(HttpStatus.OK, "login success", userDTO.getUsername(), token);
+            AuthenticationModel authenticationModel=new AuthenticationModel();
+            authenticationModel.setUser(userDTO);
+            authenticationModel.setToken(token);
+            return new AuthenticationResponse(HttpStatus.OK, "login success",authenticationModel);
         } catch (Exception e) {
             return new BaseResponse<>(HttpStatus.NOT_FOUND, e.getMessage());
         }

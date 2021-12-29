@@ -6,14 +6,13 @@ import com.example.demo.mapping.user.UserMapping;
 
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class SocietyMappingImpl implements UserMapping<Society,UserDTO> {
+public class SocietyMappingImpl implements UserMapping<Society, UserDTO> {
 
     @Override
     public Society mapUserDtoToUser(UserDTO userDTO) {
-        
-         Society society = new Society();
+
+        Society society = new Society();
         society.setName(userDTO.getName());
         society.setAddress(userDTO.getAddress());
         society.setUsername(userDTO.getUsername());
@@ -28,18 +27,20 @@ public class SocietyMappingImpl implements UserMapping<Society,UserDTO> {
 
     @Override
     public UserDTO mapUserToUserDto(Society user) {
-      
-        UserDTO society=new UserDTO();
-        society.setName(user.getName());
-        society.setAddress(user.getAddress());
-        society.setUsername(user.getUsername());
-        society.setPassword(user.getPassword());
-        society.setPhone(user.getPhone());
-        society.setEmail(user.getEmail());
-        society.setEstablishedDate(user.getEstablishedDate());
-        society.setIndustryCode(user.getIndustryCode());
-        society.setTotalCapital(user.getTotalCapital());
+
+        UserDTO society = UserDTO.builder()
+                .name(user.getName())
+                .address(user.getAddress())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .phone(user.getPhone())
+                .email(user.getEmail())
+                .createdAt(user.getCreatedAt())
+                .totalCapital(user.getTotalCapital())
+                .establishedDate(user.getEstablishedDate())
+                .industryCode(user.getIndustryCode())
+                .build();
         return society;
     }
-    
+
 }

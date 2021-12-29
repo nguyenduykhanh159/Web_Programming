@@ -13,7 +13,7 @@ import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Product;
 import com.example.demo.entity.user.User;
-import com.example.demo.mapping.cart.CartMapping;
+import com.example.demo.mapping.cart.Impl.CartMappingImpl;
 import com.example.demo.service.cart.CartService;
 
 import org.modelmapper.ModelMapper;
@@ -39,7 +39,7 @@ public class CartServiceImpl implements CartService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private CartMapping cartMapping;
+    private CartMappingImpl cartMapping;
 
     @Override
     public BaseResponse getCartInfo() {
