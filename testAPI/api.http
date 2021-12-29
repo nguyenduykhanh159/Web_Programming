@@ -1,14 +1,13 @@
 
 @host=my-happy-farmer.herokuapp.com/api/v1
 
-@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMyIsImlhdCI6MTY0MDcxNDc1MSwiZXhwIjoxNjQwODAxMTUxfQ._lqNKm-ojGAKKIG7cokc1mZ6w5pkZDa58UMKImbRyn9I3CHO7PeAjvDrJkZr3UVSgk8fNS7wsKjYqRVVkTkzBQ
-###
+@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuaWZ5IiwiaWF0IjoxNjQwNzcxNTEyLCJleHAiOjE2NDA4NTc5MTJ9.UM8KOzoGfbGgEuiVGnWtNiN-pYbxk6I3zme3yFi-0meeyLcOCRXtQo0EzsbRtZS_t7syQIswijMIdvcI360TlQ
 POST https://{{host}}/login HTTP/1.1
 Content-Type: application/json
 
 {
     "username":"quanify",
-    "password":"crquan007"
+    "password":"crquan07"
 }
 
 ### Register
@@ -103,6 +102,7 @@ GET https://{{host}}/job HTTP/1.1
 
 POST  https://{{host}}/job HTTP/1.1
 Content-Type: application/json
+Authorization:{{token}}
 
 {
         "image_url": "no/ủl",

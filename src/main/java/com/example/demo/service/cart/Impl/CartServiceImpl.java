@@ -1,5 +1,6 @@
 package com.example.demo.service.cart.Impl;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,7 +60,7 @@ public class CartServiceImpl implements CartService {
             cart.getProducts().add(product);
             cartRepository.save(cart);
 
-            return new BaseResponse<>(HttpStatus.OK, "Add successfully!",cartMapping.mapCartToCartDTO(cart));
+            return new BaseResponse<>(HttpStatus.OK, "Add successfully!", cartMapping.mapCartToCartDTO(cart));
         } catch (Exception ex) {
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Add failed!" + ex.getMessage());
         }
@@ -86,13 +87,16 @@ public class CartServiceImpl implements CartService {
 
         try {
             Cart cart = getCart();
-            for (Product product : cart.getProducts()) {
+            Collection<Product> products = cart.getProducts();
+            for (Product product : products) {
                 if (product.getId() == cartProductDTO.getId()) {
                     cart.getProducts().remove(product);
+                    break;
                 }
             }
             cartRepository.save(cart);
-            return new BaseResponse<>(HttpStatus.OK, "Remove success",cartMapping.mapCartToCartDTO(cart));
+
+            return new BaseResponse<>(HttpStatus.OK, "Remove success", cartMapping.mapCartToCartDTO(cart));
 
         } catch (Exception e) {
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed!");
