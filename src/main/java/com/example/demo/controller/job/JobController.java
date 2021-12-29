@@ -15,12 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-
-@Api(value = "Swagger2DemoRestController", description = "REST Apis related to Student Entity!!!!")
 @RestController
 @RequestMapping("/job")
 public class JobController {
@@ -43,7 +39,7 @@ public class JobController {
     @PostMapping
     public BaseResponse addJob(@RequestBody JobDTO job) {
         
-        return jobService.addJob(job);
+        return jobService.createJob(job);
     }
 
     @DeleteMapping("/{id}")

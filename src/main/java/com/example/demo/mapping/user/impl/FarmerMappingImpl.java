@@ -1,16 +1,18 @@
 package com.example.demo.mapping.user.impl;
+import java.util.Date;
 
-import com.example.demo.dto.user.FarmerDTO;
+import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.mapping.user.UserMapping;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class FarmerMappingImpl implements UserMapping<Farmer,FarmerDTO>  {
+public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
+
 
     @Override
-    public Farmer mapUserDtoToUser(FarmerDTO userDTO) {
+    public Farmer mapUserDtoToUser(UserDTO userDTO) {
         // TODO Auto-generated method stub
         Farmer farmer = new Farmer();
         farmer.setName(userDTO.getName());
@@ -20,19 +22,23 @@ public class FarmerMappingImpl implements UserMapping<Farmer,FarmerDTO>  {
         farmer.setPhone(userDTO.getPhone());
         farmer.setEmail(userDTO.getEmail());
         farmer.setAge(userDTO.getAge());
+        farmer.setCreatedAt(userDTO.getCreatedAt()!=null?userDTO.getCreatedAt():new Date());
         return farmer;
     }
 
     @Override
-    public FarmerDTO mapUserToUserDto(Farmer user) {
-       FarmerDTO farmer = new FarmerDTO();
-        farmer.setName(user.getName());
-        farmer.setAddress(user.getAddress());
-        farmer.setUsername(user.getUsername());
-        farmer.setPassword(user.getPassword());
-        farmer.setPhone(user.getPhone());
-        farmer.setEmail(user.getEmail());
-        farmer.setAge(user.getAge()); 
+    public UserDTO mapUserToUserDto(Farmer user) {
+       UserDTO farmer = UserDTO.builder()
+        .name(user.getName())
+        .address(user.getAddress())
+        .username(user.getUsername())
+        .password(user.getPassword())
+        .phone(user.getPhone())
+        .email(user.getEmail())
+        .age(user.getAge())
+        .createdAt(user.getCreatedAt())
+        .build();
+
         return farmer;
     }
 

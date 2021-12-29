@@ -1,8 +1,11 @@
 package com.example.demo.entity.job;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,9 +26,12 @@ import javax.persistence.TemporalType;
 import com.example.demo.entity.Workplace;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.entity.user.FarmerJob;
+import com.example.demo.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity(name="job")
 @Data
@@ -45,7 +51,7 @@ public class Job {
 
     @Column(name="create_at")
    @Temporal(TemporalType.DATE)
-   private Date createAt;
+   private Date createdAt;
 
    @Column(name="salary")
    private float salary;
@@ -72,16 +78,21 @@ public class Job {
 
    //1 job is created by 1 farmer
    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-   @JsonIgnore
    @JoinColumn(name="owner_id")
-    private Farmer owner;
+   @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private User owner;
   
     //1 job can have n contacts 
     @OneToMany(mappedBy = "job")
-    private Set<FarmerJob> contacts=new HashSet<FarmerJob>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<FarmerJob> contacts;;
 
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name ="workplace_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Workplace workplace;
 }

@@ -17,7 +17,7 @@ public class JobMappingImpl implements JobMapping {
         job.setId(jobDTO.getId());
         job.setImageUrl(jobDTO.getImageUrl());
         job.setAddress(jobDTO.getAddress());
-        job.setCreateAt(jobDTO.getCreatedAt());
+        job.setCreatedAt(jobDTO.getCreatedAt());
         job.setContact(jobDTO.getContact());
         job.setContactNumber(jobDTO.getContactNumber());
         job.setJobDetail(jobDTO.getJobDetail());
@@ -30,20 +30,21 @@ public class JobMappingImpl implements JobMapping {
 
     @Override
     public JobDTO mapJobtoJobDTO(Job job) {
-        JobDTO jobDTO=new JobDTO();
-        jobDTO.setName(job.getName());
-        jobDTO.setId(job.getId());
-        jobDTO.setImageUrl(job.getImageUrl());
-        jobDTO.setAddress(job.getAddress());
-        jobDTO.setCreatedAt(job.getCreateAt());
-        jobDTO.setContact(job.getContact());
-        jobDTO.setContactNumber(job.getContactNumber());
-        jobDTO.setJobDetail(job.getJobDetail());
-        jobDTO.setSalary(job.getSalary());
-        jobDTO.setDescription(job.getDescription());
-        jobDTO.setDue(job.getDue());
-        jobDTO.setArea(job.getWorkplace().getArea());
-        jobDTO.setJobStatus(job.getJobStatus().toString());
+        JobDTO jobDTO=JobDTO.builder()
+       .name(job.getName())
+       .id(job.getId())
+       .imageUrl(job.getImageUrl())
+       .address(job.getAddress())
+       .createdAt(job.getCreatedAt())
+       .contact(job.getContact())
+       .contactNumber(job.getContactNumber())
+       .jobDetail(job.getJobDetail())
+       .salary(job.getSalary())
+       .description(job.getDescription())
+       .due(job.getDue())
+       .area(job.getWorkplace().getArea())
+       .jobStatus(job.getJobStatus().toString())
+       .build();
         return jobDTO;
        
     }

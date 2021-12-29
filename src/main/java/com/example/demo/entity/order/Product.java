@@ -1,12 +1,20 @@
 package com.example.demo.entity.order;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import com.example.demo.entity.cart.Cart;
+
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity(name="product")
 @Data
@@ -44,5 +52,12 @@ public class Product {
    private String description;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<OrderProduct> orders=new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<OrderProduct> orders;
+
+    @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Cart> carts;
 }
