@@ -90,6 +90,7 @@ public class JobServiceImpl implements JobService {
 
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
+                    
             User user = userRepository.getById(userDetails.getUser().getId());
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
 
@@ -99,6 +100,7 @@ public class JobServiceImpl implements JobService {
             job.setCreatedAt(new Date());
             job.setWorkplace(workplace);
             job.setOwner(user);
+
             jobRepository.save(job);
 
             return new BaseResponse<JobDTO>(HttpStatus.OK, "Add successfully!", jobMapping.mapJobtoJobDTO(job));

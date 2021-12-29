@@ -48,7 +48,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public BaseResponse placeOrder(List<CartProductDTO> cartDto) {
         try {
-
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
 
@@ -58,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
             order.setCreatedAt(new Date());
             order.setUser(user);
             orderRepository.save(order);
+           
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setCreatedAt(order.getCreatedAt());
             orderDTO.setProducts(new ArrayList<>());
@@ -79,8 +79,8 @@ public class OrderServiceImpl implements OrderService {
                         .quantity(cartProductDto.getQuantity())
                         .build();
                 orderDTO.getProducts().add(productDTO);
-
             }
+            
 
             return new BaseResponse<>(HttpStatus.OK, "Place success!", orderDTO);
         } catch (Exception e) {
