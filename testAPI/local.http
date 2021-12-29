@@ -15,9 +15,9 @@ Content-Type: application/json
 
 {
 "name": "Phung Quan",
-"username": "quan5",
+"username": "quan6",
 "password": "crquan07",
-"email": "quan5@gmail.com",
+"email": "quan6@gmail.com",
 "address": "83 Xa Dan",
 "phone": "0974654701",
 "type":"FARMER",

@@ -3,12 +3,12 @@
 
 @token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMyIsImlhdCI6MTY0MDcxNDc1MSwiZXhwIjoxNjQwODAxMTUxfQ._lqNKm-ojGAKKIG7cokc1mZ6w5pkZDa58UMKImbRyn9I3CHO7PeAjvDrJkZr3UVSgk8fNS7wsKjYqRVVkTkzBQ
 ###
-POST http://{{host}}/login HTTP/1.1
+POST https://{{host}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username":"quan3",
-    "password":"crquan07"
+    "username":"quanify",
+    "password":"crquan007"
 }
 
 ### Register
