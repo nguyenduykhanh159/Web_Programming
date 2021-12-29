@@ -135,7 +135,7 @@ Content-Type: application/json
  }
 
 ### Request to do a job '
-@job_id=37
+@job_id=1
 POST  http://{{host}}/job/receiveJob/{{job_id}}
 Content-Type: application/json
 Authorization: {{token}}
