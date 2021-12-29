@@ -1,6 +1,7 @@
 package com.example.demo.config.jwt;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -47,7 +48,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 return;
             }
             UserDetails userDetails=userService.loadUserByUsername(jwtTokenProvider.getUsernameFromToken(token));
-            UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(userDetails,null, userDetails==null?List.of():userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             filterChain.doFilter(request, response);
