@@ -22,12 +22,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@Tag(name = "Home")
 public class HomeController {
 
     @Autowired
     private CustomUserService customUserService;
 
+    @GetMapping(value = "/login")
     public BaseResponse login(@RequestBody UserDTO userDTO) {
         return customUserService.login(userDTO);
     }
