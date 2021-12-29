@@ -17,8 +17,8 @@ Content-Type: application/json
 
 {
 "name": "Phung Quan",
-"username": "quanify",
-"password": "crquan07",
+"username":"quanify",
+"password":"crquan07",
 "email": "quanbka00@gmail.com",
 "address": "83 Xa Dan",
 "phone": "0974654701",

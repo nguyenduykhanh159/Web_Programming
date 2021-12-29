@@ -28,54 +28,6 @@ public class HomeController {
     @Autowired
     private CustomUserService customUserService;
 
-    @Operation(summary = "Đăng nhập với bệnh nhân hoặc bác sĩ", description = "")
-
-    // @ApiResponses(value = {
-
-    //         @ApiResponse(responseCode = "200", description = "successful",
-
-    //                 content = @Content(
-
-    //                         mediaType = MediaType.APPLICATION_JSON_VALUE,
-
-    //                         schema = @Schema(implementation =
-
-    //                         SwaggerExampleResponse.class),
-
-    //                         examples =
-
-    //                         @ExampleObject(value = SwaggerExampleResponse.LOGIN_RESPONSE))),
-
-    //         @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema
-
-    //         = @Schema(implementation = NotFoundResponse.class))),
-
-    //         @ApiResponse(responseCode = "401", description = "Forbidden", content
-
-    //         = @Content(schema = @Schema(implementation = NotFoundResponse.class))),
-
-    //         @ApiResponse(responseCode = "403", description =
-
-    //         "Forbidden", content = @Content(schema = @Schema(implementation = NotFoundResponse.class))),
-
-    //         @ApiResponse(responseCode = "500", description =
-
-    //         "Internal Server Error", content = @Content(schema = @Schema(implementation = NotFoundResponse.class))) })
-
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {
-
-            // @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-
-            //         examples = @ExampleObject(value =
-
-            //         SwaggerExampleRequest.LOGIN_REQUEST))
-            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
-                     
-
-
-    })
-
-    @PostMapping("/login")
     public BaseResponse login(@RequestBody UserDTO userDTO) {
         return customUserService.login(userDTO);
     }
