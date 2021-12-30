@@ -141,8 +141,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "deal_price":300000,
-    "comment":"Nhanh chong, hieu qua, chat luong"
+      "deal_price":300000,
+      "comment":"Nhanh chong, hieu qua, chat luong"
 }
 
 // Cart info

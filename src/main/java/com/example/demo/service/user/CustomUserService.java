@@ -2,7 +2,6 @@ package com.example.demo.service.user;
 
 import java.util.ArrayList;
 
-
 import com.example.demo.base.response.AuthenticationModel;
 import com.example.demo.base.response.AuthenticationResponse;
 import com.example.demo.base.response.BaseResponse;
@@ -31,7 +30,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class CustomUserService implements UserDetailsService, UserService {
 
     @Autowired
@@ -71,7 +73,7 @@ public class CustomUserService implements UserDetailsService, UserService {
     {
         try {
             String token = null;
-            UserDTO user_respose=new UserDTO();
+            UserDTO user_respose = new UserDTO();
             user_respose.setAddress(userDTO.getAddress());
             user_respose.setName(userDTO.getName());
             user_respose.setEmail(userDTO.getEmail());
@@ -104,8 +106,10 @@ public class CustomUserService implements UserDetailsService, UserService {
             authenticationModel.setUser(user_respose);
             authenticationModel.setToken(token);
 
-            return new AuthenticationResponse(HttpStatus.OK, "Register success",authenticationModel);
+            return new AuthenticationResponse(HttpStatus.OK, "Register success", authenticationModel);
         } catch (Exception e) {
+
+            log.error(e.getMessage(), e.getCause());
             return new NotFoundResponse(HttpStatus.NOT_FOUND, "Register failed!" + e.getMessage());
         }
 
@@ -124,6 +128,9 @@ public class CustomUserService implements UserDetailsService, UserService {
             userRepository.deleteById(userId);
             return new BaseResponse<>(HttpStatus.OK, "Remove successful!");
         } catch (Exception e) {
+
+            log.error(e.getMessage(), e.getCause());
+
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed!" + e.getMessage());
         }
 
@@ -136,12 +143,25 @@ public class CustomUserService implements UserDetailsService, UserService {
                     new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            String token = jwtTokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-            AuthenticationModel authenticationModel=new AuthenticationModel();
-            authenticationModel.setUser(userDTO);
+            CustomUserDetails userDetails=(CustomUserDetails) authentication.getPrincipal();
+            String token = jwtTokenProvider.generateToken((userDetails));
+            AuthenticationModel authenticationModel = new AuthenticationModel();
+
+            User user=userDetails.getUser();
+            UserDTO user_response=new UserDTO();
+            user_response.setAddress(user.getAddress());
+            user_response.setName(user.getName());
+            user_response.setEmail(user.getEmail());
+            user_response.setUsername(user.getUsername());
+
+            authenticationModel.setUser(user_response);
             authenticationModel.setToken(token);
-            return new AuthenticationResponse(HttpStatus.OK, "login success",authenticationModel);
+
+            return new AuthenticationResponse(HttpStatus.OK, "login success", authenticationModel);
         } catch (Exception e) {
+
+            log.error(e.getMessage(), e.getCause());
+
             return new BaseResponse<>(HttpStatus.NOT_FOUND, e.getMessage().toString());
         }
     }
