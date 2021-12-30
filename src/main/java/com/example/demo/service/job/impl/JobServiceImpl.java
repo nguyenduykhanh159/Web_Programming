@@ -93,7 +93,9 @@ public class JobServiceImpl implements JobService {
                     
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
-            Job job = jobMapping.mapJobDtoToJob(jobDTO);
+            Job job = new Job();
+
+            job=jobMapping.mapJobDtoToJob(jobDTO);
 
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
@@ -106,7 +108,7 @@ public class JobServiceImpl implements JobService {
 
             return new BaseResponse<JobDTO>(HttpStatus.OK, "Add successfully!", jobMapping.mapJobtoJobDTO(job));
         } catch (Exception e) {
-            return new NotFoundResponse(HttpStatus.BAD_REQUEST, "Add failed! " + e.getMessage());
+            return new NotFoundResponse(HttpStatus.BAD_REQUEST, "Add failed! " + e.toString());
         }
 
     }
@@ -153,7 +155,7 @@ public class JobServiceImpl implements JobService {
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
             User user=userRepository.findById(userDetails.getUser().getId()).get();
-            
+
             FarmerJobID fjId = new FarmerJobID(jobId, user.getId());
             FarmerJob farmerJob = new FarmerJob();
             farmerJob.setFarmerJobID(fjId);

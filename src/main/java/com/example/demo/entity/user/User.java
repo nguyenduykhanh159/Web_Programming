@@ -5,16 +5,12 @@ import javax.persistence.*;
 
 import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Order;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity(name="usez")
 @Inheritance(strategy = InheritanceType.JOINED)
