@@ -142,7 +142,7 @@ public class CustomUserService implements UserDetailsService, UserService {
             authenticationModel.setToken(token);
             return new AuthenticationResponse(HttpStatus.OK, "login success",authenticationModel);
         } catch (Exception e) {
-            return new BaseResponse<>(HttpStatus.NOT_FOUND, e.getMessage());
+            return new BaseResponse<>(HttpStatus.NOT_FOUND, e.getMessage().toString());
         }
     }
 }
