@@ -92,9 +92,7 @@ public class JobServiceImpl implements JobService {
 
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
-            Job job = new Job();
-
-            job = jobMapping.mapJobDtoToJob(jobDTO);
+            Job job = jobMapping.mapJobDtoToJob(jobDTO);
 
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
