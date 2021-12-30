@@ -331,6 +331,7 @@ public class JobServiceImpl implements JobService {
                 farmerJobDTO.setPhone(farmer.getPhone());
                 farmerJobDTO.setStatus(farmerJob.getStatus().toString());
                 farmerJobDTO.setReceivedAt(farmerJob.getReceivedAt());
+                farmerJobDTO.setWorkerId(farmer.getId());
 
                 createdJobDTO.getReceivers().add(farmerJobDTO);
 
