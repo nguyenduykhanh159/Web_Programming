@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.dao.FarmerJobRepository;
@@ -42,7 +41,6 @@ public class JobServiceImpl implements JobService {
     @Autowired
     private JobMapping jobMapping;
 
-
     @Autowired
     private UserRepository userRepository;
 
@@ -51,19 +49,20 @@ public class JobServiceImpl implements JobService {
         List<Job> jobs = jobRepository.findAll();
         List<JobDTO> jobDTOs = new ArrayList<>();
         for (Job job : jobs) {
-            JobDTO jobDTO = JobDTO.builder()
-                    .id(job.getId())
-                    .imageUrl(job.getImageUrl())
-                    .address(job.getAddress())
-                    .description(job.getDescription())
-                    .createdAt(job.getCreatedAt())
-                    .contact(job.getContact())
-                    .contactNumber(job.getContactNumber())
-                    .due(job.getDue())
-                    .salary(job.getSalary())
-                    .jobDetail(job.getJobDetail())
-                    .jobStatus(job.getJobStatus().toString())
-                    .build();
+            JobDTO jobDTO = new JobDTO();
+            jobDTO.setName(job.getName());
+            jobDTO.setId(job.getId());
+            jobDTO.setImageUrl(job.getImageUrl());
+            jobDTO.setAddress(job.getAddress());
+            jobDTO.setCreatedAt(job.getCreatedAt());
+            jobDTO.setContact(job.getContact());
+            jobDTO.setContactNumber(job.getContactNumber());
+            jobDTO.setJobDetail(job.getJobDetail());
+            jobDTO.setSalary(job.getSalary());
+            jobDTO.setDescription(job.getDescription());
+            jobDTO.setDue(job.getDue());
+            jobDTO.setArea(job.getWorkplace().getArea());
+            jobDTO.setJobStatus(job.getJobStatus().toString());
             jobDTOs.add(jobDTO);
 
         }
@@ -90,12 +89,12 @@ public class JobServiceImpl implements JobService {
 
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
-                    
+
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
             Job job = new Job();
 
-            job=jobMapping.mapJobDtoToJob(jobDTO);
+            job = jobMapping.mapJobDtoToJob(jobDTO);
 
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
@@ -154,7 +153,7 @@ public class JobServiceImpl implements JobService {
 
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
-            User user=userRepository.findById(userDetails.getUser().getId()).get();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
 
             FarmerJobID fjId = new FarmerJobID(jobId, user.getId());
             FarmerJob farmerJob = new FarmerJob();

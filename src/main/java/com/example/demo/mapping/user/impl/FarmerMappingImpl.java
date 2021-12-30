@@ -28,17 +28,14 @@ public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
 
     @Override
     public UserDTO mapUserToUserDto(Farmer user) {
-       UserDTO farmer = UserDTO.builder()
-        .name(user.getName())
-        .address(user.getAddress())
-        .username(user.getUsername())
-        .password(user.getPassword())
-        .phone(user.getPhone())
-        .email(user.getEmail())
-        .age(user.getAge())
-        .createdAt(user.getCreatedAt())
-        .build();
-
+         UserDTO farmer = new UserDTO();
+        farmer.setName(user.getName());
+        farmer.setAddress(user.getAddress());
+        farmer.setUsername(user.getUsername());
+        farmer.setPassword(user.getPassword());
+        farmer.setPhone(user.getPhone());
+        farmer.setEmail(user.getEmail());
+        farmer.setAge(user.getAge()); 
         return farmer;
     }
 

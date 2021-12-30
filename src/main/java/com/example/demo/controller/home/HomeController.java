@@ -25,6 +25,7 @@ public class HomeController {
 
     @PostMapping(value = "/login")
     public BaseResponse login(@RequestBody UserDTO userDTO) {
+        
         return customUserService.login(userDTO);
     }
 
@@ -35,8 +36,7 @@ public class HomeController {
     }
 
     @GetMapping("/remove/{id}")
-    public BaseResponse removeUser(@PathVariable("id") Integer userId) {
-        System.out.println(userId);
+    public BaseResponse removeUser(@PathVariable("id") Integer userId) {       
         return customUserService.removeUser(userId);
     }
 

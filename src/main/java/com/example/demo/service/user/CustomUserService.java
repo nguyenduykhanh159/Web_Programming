@@ -1,9 +1,7 @@
 package com.example.demo.service.user;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import javax.persistence.EntityManager;
 
 import com.example.demo.base.response.AuthenticationModel;
 import com.example.demo.base.response.AuthenticationResponse;
@@ -11,10 +9,7 @@ import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.config.jwt.JwtTokenProvider;
 import com.example.demo.dao.CartRepository;
-import com.example.demo.dao.FarmerRepository;
-import com.example.demo.dao.SocietyRepository;
 import com.example.demo.dao.UserRepository;
-import com.example.demo.dto.auth.RegisterDTO;
 import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.cart.Cart;
@@ -76,12 +71,12 @@ public class CustomUserService implements UserDetailsService, UserService {
     {
         try {
             String token = null;
-            UserDTO user_respose=UserDTO.builder()
-                                        .name(userDTO.getName())
-                                        .address(userDTO.getAddress())
-                                        .email(userDTO.getEmail())
-                                        .phone(userDTO.getPhone())
-                                        .createdAt(new Date()).build();
+            UserDTO user_respose=new UserDTO();
+            user_respose.setAddress(userDTO.getAddress());
+            user_respose.setName(userDTO.getName());
+            user_respose.setEmail(userDTO.getEmail());
+            user_respose.setUsername(userDTO.getUsername());
+
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             String userType = userDTO.getType().toUpperCase();
 
@@ -108,6 +103,7 @@ public class CustomUserService implements UserDetailsService, UserService {
             AuthenticationModel authenticationModel = new AuthenticationModel();
             authenticationModel.setUser(user_respose);
             authenticationModel.setToken(token);
+
             return new AuthenticationResponse(HttpStatus.OK, "Register success",authenticationModel);
         } catch (Exception e) {
             return new NotFoundResponse(HttpStatus.NOT_FOUND, "Register failed!" + e.getMessage());

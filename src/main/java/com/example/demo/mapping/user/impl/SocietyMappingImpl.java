@@ -28,18 +28,16 @@ public class SocietyMappingImpl implements UserMapping<Society, UserDTO> {
     @Override
     public UserDTO mapUserToUserDto(Society user) {
 
-        UserDTO society = UserDTO.builder()
-                .name(user.getName())
-                .address(user.getAddress())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .phone(user.getPhone())
-                .email(user.getEmail())
-                .createdAt(user.getCreatedAt())
-                .totalCapital(user.getTotalCapital())
-                .establishedDate(user.getEstablishedDate())
-                .industryCode(user.getIndustryCode())
-                .build();
+        UserDTO society = new UserDTO();
+        society.setName(user.getName());
+        society.setAddress(user.getAddress());
+        society.setUsername(user.getUsername());
+        society.setPassword(user.getPassword());
+        society.setPhone(user.getPhone());
+        society.setEmail(user.getEmail());
+        society.setEstablishedDate(user.getEstablishedDate());
+        society.setIndustryCode(user.getIndustryCode());
+        society.setTotalCapital(user.getTotalCapital());
         return society;
     }
 
