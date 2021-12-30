@@ -29,7 +29,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import jdk.internal.org.jline.utils.Log;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class JobServiceImpl implements JobService {
 
     @Autowired
@@ -99,6 +103,9 @@ public class JobServiceImpl implements JobService {
             workplace.setArea(jobDTO.getArea());
             job.setCreatedAt(new Date());
             job.setWorkplace(workplace);
+
+            log.info(user.getUsername());
+            
             job.setOwner(user);
 
             jobRepository.save(job);

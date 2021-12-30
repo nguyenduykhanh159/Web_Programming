@@ -1,11 +1,11 @@
 @host=localhost:8080/api/v1
-@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuaWZ5IiwiaWF0IjoxNjQwNzg5Mjc3LCJleHAiOjE2NDA4NzU2Nzd9._EyTj4JW8hHlOavobvMFn7xgIKsaMZVXG1rXrhCNSc8_FH4wwGYo8RyDqTaZXPoll_qgnC9-wd3CyouXED0BbQ
+@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMSIsImlhdCI6MTY0MDgzMDExMiwiZXhwIjoxNjQwOTE2NTEyfQ.wJ1PYd9IfD5OWjoIKjhZnUnWjx4T7DATNztT84g-BTeJA1M-fMAuGkuRQowUiQqIH1faRsRlWfASgAUxYAJ2dg
 ###
 POST http://{{host}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username":"quanify",
+    "username":"quan1",
     "password":"crquan07"
 }
 
@@ -156,7 +156,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-      "product_id": 4
+      "product_id": 2
       
 }
 
@@ -184,6 +184,9 @@ Authorization: {{token}}
   "cart":[
     {
       "product_id": 1
+    },
+    {
+      "product_id": 2
     } 
   ]   
 }
