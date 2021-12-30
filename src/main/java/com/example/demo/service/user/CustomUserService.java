@@ -72,7 +72,7 @@ public class CustomUserService implements UserDetailsService, UserService {
 
     {
         try {
-            String token = null;
+           
             UserDTO user_respose = new UserDTO();
             user_respose.setAddress(userDTO.getAddress());
             user_respose.setName(userDTO.getName());
@@ -90,7 +90,7 @@ public class CustomUserService implements UserDetailsService, UserService {
 
                 cartRepository.save(cart);
                 userRepository.save(farmer);
-                token = jwtTokenProvider.generateToken(new CustomUserDetails(farmer));
+               
             } else if (UserType.valueOf(userType) == UserType.SOCIETY) {
                 Society society = societyMapping.mapUserDtoToUser(userDTO);
                 Cart cart = new Cart();
@@ -100,11 +100,11 @@ public class CustomUserService implements UserDetailsService, UserService {
                 cartRepository.save(cart);
                 society.setCart(cart);
                 userRepository.save(society);
-                token = jwtTokenProvider.generateToken(new CustomUserDetails(society));
+              
             }
             AuthenticationModel authenticationModel = new AuthenticationModel();
             authenticationModel.setUser(user_respose);
-            authenticationModel.setToken(token);
+        
 
             return new AuthenticationResponse(HttpStatus.OK, "Register success", authenticationModel);
         } catch (Exception e) {
