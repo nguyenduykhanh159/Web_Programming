@@ -127,7 +127,7 @@ Content-Type: application/json
 
  {
       "job_id": 2,
-      "worker_id": 4,
+      "worker_id": 1,
       "deal_price": 300000.0,
       "comment": "Nhanh chong, hieu qua, chat luong",
       "received_at": "2021-12-25T10:41:14.596+00:00",
