@@ -32,9 +32,10 @@ public class JwtTokenProvider {
                     .signWith(SignatureAlgorithm.HS512, secret)
                     .compact();
         } catch (Exception e) {
-            e.getStackTrace();
+           
+            return e.getMessage();
         }
-        return null;
+       
 
     }
 
@@ -45,14 +46,18 @@ public class JwtTokenProvider {
             return true;
         } catch (MalformedJwtException ex) {
             System.out.println(ex.getMessage());
+            return false;
         } catch (ExpiredJwtException ex) {
             System.out.println(ex.getMessage());
+            return false;
         } catch (UnsupportedJwtException ex) {
             System.out.println(ex.getMessage());
+            return false;
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
+            return false;
         }
-        return false;
+        
     }
 
     public String getUsernameFromToken(String token) {
@@ -60,9 +65,8 @@ public class JwtTokenProvider {
             Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
             return claims.getSubject();
         } catch (Exception e) {
-            e.getStackTrace();
+            return e.getStackTrace().toString();
         }
-        return null;
 
     }
 }
