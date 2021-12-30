@@ -30,6 +30,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4
 public class JobServiceImpl implements JobService {
 
     @Autowired
@@ -99,6 +100,8 @@ public class JobServiceImpl implements JobService {
             workplace.setArea(jobDTO.getArea());
             job.setCreatedAt(new Date());
             job.setWorkplace(workplace);
+            
+            log.info(user.getUsername());
             job.setOwner(user);
 
             jobRepository.save(job);
