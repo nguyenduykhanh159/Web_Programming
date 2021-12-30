@@ -7,6 +7,7 @@ import com.example.demo.base.response.BaseResponse;
 import com.example.demo.dto.job.FarmerJobDTO;
 import com.example.demo.dto.job.JobDTO;
 import com.example.demo.service.job.JobService;
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +35,24 @@ public class JobController {
     @GetMapping("/detail/{id}")
     public BaseResponse getJob(@PathVariable("id") Integer jobId) {
         return jobService.getJob(jobId);
+    }
+
+    @GetMapping("/createdJob")
+    public BaseResponse createdJob()
+    {
+        return jobService.getCreatedJobs();
+    }
+
+    @GetMapping("/createdJob/{id}")
+    public BaseResponse createdJobDetail(@PathVariable("id") Integer jobId)
+    {
+        return jobService.getCreatedJobDetail(jobId);
+    }
+    
+    @GetMapping("/receivedJob")
+    public BaseResponse receivedJob()
+    {
+        return jobService.getReceivedJobs();
     }
 
     @PostMapping
@@ -69,4 +88,5 @@ public class JobController {
     {
         return jobService.receiveJob(farmerJobDTO,jobId);
     }
+    
 }

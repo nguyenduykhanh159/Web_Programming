@@ -35,10 +35,7 @@ public class Farmer extends User {
 
    
     //1 farmer do n jobs
-    @OneToMany(mappedBy = "worker")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Collection<FarmerJob> doJob;
+   
 
     @OneToMany(mappedBy = "farmer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude

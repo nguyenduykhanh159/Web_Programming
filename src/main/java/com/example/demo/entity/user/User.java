@@ -4,9 +4,12 @@ package com.example.demo.entity.user;
 import javax.persistence.*;
 
 import com.example.demo.entity.cart.Cart;
+import com.example.demo.entity.job.Job;
 import com.example.demo.entity.order.Order;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,4 +54,12 @@ public class User {
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Cart cart;
+
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Collection<Job> createdJobs;
+
+     @OneToMany(mappedBy = "worker")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<FarmerJob> doJobs;
 }
