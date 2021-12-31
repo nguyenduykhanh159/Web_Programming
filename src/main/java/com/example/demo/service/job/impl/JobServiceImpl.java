@@ -55,13 +55,13 @@ public class JobServiceImpl implements JobService {
         List<Job> jobs = jobRepository.findAll();
         List<JobDTO> jobDTOs = new ArrayList<>();
         for (Job job : jobs) {
+            User owner=job.getOwner();
             JobDTO jobDTO = new JobDTO();
             jobDTO.setName(job.getName());
             jobDTO.setId(job.getId());
             jobDTO.setImageUrl(job.getImageUrl());
             jobDTO.setAddress(job.getAddress());
             jobDTO.setCreatedAt(job.getCreatedAt());
-            jobDTO.setContact(job.getContact());
             jobDTO.setContactNumber(job.getContactNumber());
             jobDTO.setJobDetail(job.getJobDetail());
             jobDTO.setSalary(job.getSalary());
@@ -69,6 +69,7 @@ public class JobServiceImpl implements JobService {
             jobDTO.setDue(job.getDue());
             jobDTO.setArea(job.getWorkplace().getArea());
             jobDTO.setJobStatus(job.getJobStatus().toString());
+            jobDTO.setContact(owner.getName());
             jobDTOs.add(jobDTO);
 
         }
@@ -99,6 +100,7 @@ public class JobServiceImpl implements JobService {
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
+            job.setContact(user.getName());
             job.setOwner(user);
 
             Workplace workplace = new Workplace();
