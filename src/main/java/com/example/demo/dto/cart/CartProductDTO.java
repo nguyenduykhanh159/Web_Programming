@@ -16,10 +16,13 @@ public class CartProductDTO {
     private String name;
 
     @JsonProperty("quantity")
-    private int quantity;
+    private Integer quantity;
+    
+    @JsonProperty("bought_quantity")
+    private Integer boughtQuantity;
 
     @JsonProperty("price")
-    private float price;
+    private Float price;
 
     @JsonProperty("image_url")
     private String imageUrl;
