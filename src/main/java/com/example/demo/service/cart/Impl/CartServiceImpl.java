@@ -66,11 +66,23 @@ public class CartServiceImpl implements CartService {
 
             CartProductID cartProductID = new CartProductID(cart.getId(), cartProductDTO.getId());
 
-            CartProduct cartProduct = new CartProduct();
-            cartProduct.setCartProductID(cartProductID);
-            cartProduct.setBoughtQuantity(cartProductDTO.getBoughtQuantity());
-            cartProduct.setCart(cart);
-            cartProduct.setProduct(product);
+            CartProduct cartProduct = cartProductRepository.findById(cartProductID).orElse(null);
+            if (cartProduct != null) {
+                int boughtQuantity = cartProduct.getBoughtQuantity();
+                if (cartProductDTO.getBoughtQuantity() != null) {
+                    cartProduct.setBoughtQuantity(boughtQuantity + cartProductDTO.getBoughtQuantity());
+                } else {
+                    cartProduct.setBoughtQuantity(boughtQuantity + 1);
+                }
+
+            } else {
+                cartProduct = new CartProduct();
+                cartProduct.setCartProductID(cartProductID);
+                cartProduct.setBoughtQuantity(1);
+                cartProduct.setCart(cart);
+                cartProduct.setProduct(product);
+
+            }
 
             cartProductRepository.save(cartProduct);
 

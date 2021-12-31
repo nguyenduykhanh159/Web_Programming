@@ -165,7 +165,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-      "product_id": 3
+      "product_id": 1,
+      "bought_quantity":30
       
 }
 
@@ -175,7 +176,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-      "product_id": 3
+      "product_id": 1
+
       
 }
 
