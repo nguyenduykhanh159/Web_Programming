@@ -10,7 +10,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.example.demo.entity.cart.Cart;
-
+import com.example.demo.entity.cart.CartProduct;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -56,8 +56,8 @@ public class Product {
     @ToString.Exclude
     private Collection<OrderProduct> orders;
 
-    @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Collection<Cart> carts;
+    private Collection<CartProduct> carts;
 }

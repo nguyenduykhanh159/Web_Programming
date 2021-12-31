@@ -8,6 +8,7 @@ import java.util.Set;
 import com.example.demo.dto.cart.CartDTO;
 import com.example.demo.dto.cart.CartProductDTO;
 import com.example.demo.entity.cart.Cart;
+import com.example.demo.entity.cart.CartProduct;
 import com.example.demo.entity.order.Order;
 import com.example.demo.entity.order.OrderProduct;
 import com.example.demo.entity.order.Product;
@@ -38,9 +39,17 @@ public class CartMappingImpl implements CartMapping {
     public List<CartProductDTO> mapCartToCartDTO(Cart cart)
     {
         List<CartProductDTO> productInCarts=new ArrayList<>();
-        for(Product product: cart.getProducts())
+        Collection<CartProduct> products=cart.getProducts();
+        for(CartProduct cartProduct: products)
         {
-            CartProductDTO cartProductDTO=modelMapper.map(product, CartProductDTO.class);
+            Product product=cartProduct.getProduct();
+            CartProductDTO cartProductDTO=new CartProductDTO();
+            cartProductDTO.setId(product.getId());
+            cartProductDTO.setBoughtQuantity(cartProduct.getBoughtQuantity());
+            cartProductDTO.setPrice(product.getPrice());
+            cartProductDTO.setName(product.getName());
+            cartProductDTO.setImageUrl(product.getImageUrl());
+            cartProductDTO.setQuantity(product.getQuantity());
             productInCarts.add(cartProductDTO);
         }
         return productInCarts;

@@ -6,12 +6,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.example.demo.base.response.BaseResponse;
+import com.example.demo.dao.CartProductRepository;
 import com.example.demo.dao.CartRepository;
 import com.example.demo.dao.ProductRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.cart.CartProductDTO;
 import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.cart.Cart;
+import com.example.demo.entity.cart.CartProduct;
+import com.example.demo.entity.cart.CartProductID;
 import com.example.demo.entity.order.Product;
 import com.example.demo.entity.user.User;
 import com.example.demo.mapping.cart.Impl.CartMappingImpl;
@@ -24,7 +27,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class CartServiceImpl implements CartService {
 
     @Autowired
@@ -37,7 +43,7 @@ public class CartServiceImpl implements CartService {
     private ProductRepository productRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private CartProductRepository cartProductRepository;
 
     @Autowired
     private CartMappingImpl cartMapping;
@@ -57,11 +63,21 @@ public class CartServiceImpl implements CartService {
         try {
             Cart cart = getCart();
             Product product = productRepository.getById(cartProductDTO.getId());
-            cart.getProducts().add(product);
-            cartRepository.save(cart);
 
-            return new BaseResponse<>(HttpStatus.OK, "Add successfully!", cartMapping.mapCartToCartDTO(cart));
+            CartProductID cartProductID = new CartProductID(cart.getId(), cartProductDTO.getId());
+
+            CartProduct cartProduct = new CartProduct();
+            cartProduct.setCartProductID(cartProductID);
+            cartProduct.setBoughtQuantity(cartProductDTO.getBoughtQuantity());
+            cartProduct.setCart(cart);
+            cartProduct.setProduct(product);
+
+            cartProductRepository.save(cartProduct);
+
+            return new BaseResponse<>(HttpStatus.OK, "Add successfully!");
         } catch (Exception ex) {
+
+            log.error(ex.getMessage(), ex.getCause());
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Add failed!" + ex.getMessage());
         }
     }
@@ -87,18 +103,16 @@ public class CartServiceImpl implements CartService {
 
         try {
             Cart cart = getCart();
-            Collection<Product> products = cart.getProducts();
-            for (Product product : products) {
-                if (product.getId() == cartProductDTO.getId()) {
-                    cart.getProducts().remove(product);
-                    break;
-                }
-            }
-            cartRepository.save(cart);
+            CartProductID cartProductID = new CartProductID(cart.getId(), cartProductDTO.getId());
 
-            return new BaseResponse<>(HttpStatus.OK, "Remove success", cartMapping.mapCartToCartDTO(cart));
+            cartProductRepository.deleteById(cartProductID);
 
-        } catch (Exception e) {
+            return new BaseResponse<>(HttpStatus.OK, "Remove success");
+
+        } catch (Exception ex) {
+
+            log.error(ex.getMessage(), ex.getCause());
+
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed!");
         }
     }
