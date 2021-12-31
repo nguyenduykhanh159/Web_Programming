@@ -25,14 +25,14 @@ public class CartProduct {
     @Column(name = "bought_quantity")
     private Integer boughtQuantity;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, fetch = FetchType.LAZY)
     @MapsId("cart_id")
     @JoinColumn(name = "cart_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Cart cart;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH},fetch = FetchType.LAZY)
     @MapsId("product_id")
     @JoinColumn(name="product_id")
     @EqualsAndHashCode.Exclude

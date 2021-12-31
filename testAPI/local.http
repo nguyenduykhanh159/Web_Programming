@@ -165,7 +165,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-      "product_id": 2
+      "product_id": 3
       
 }
 
@@ -175,7 +175,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-      "product_id": 6
+      "product_id": 3
       
 }
 
