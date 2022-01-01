@@ -158,12 +158,11 @@ public class JobServiceImpl implements JobService {
 
             Notification notification = new Notification();
             notification.setCreatedAt(new Date());
-            notification.setMessage(user.getName() + " đã chấp nhận yêu cầu cho việc "+farmerJob.getJob().getName());
+            notification.setMessage(user.getName() + " đã chấp nhận yêu cầu cho việc " + farmerJob.getJob().getName());
             notification.setSender(user.getName());
             notification.setOwner(owner);
             notification.setStatus(NoteStatus.UNREAD);
             notiService.addNewNotification(notification);
-
 
             farmerJobDTO.setAcceptedAt(farmerJob.getAcceptedAt());
             farmerJobDTO.setStatus(farmerJob.getStatus().toString());
@@ -187,8 +186,8 @@ public class JobServiceImpl implements JobService {
                     .getPrincipal();
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
-            Job job=jobRepository.findById(jobId).orElse(null);
-            User owner=job.getOwner();
+            Job job = jobRepository.findById(jobId).orElse(null);
+            User owner = job.getOwner();
             FarmerJobID fjId = new FarmerJobID(jobId, user.getId());
             FarmerJob farmerJob = new FarmerJob();
             farmerJob.setFarmerJobID(fjId);
@@ -199,9 +198,9 @@ public class JobServiceImpl implements JobService {
 
             fJobRepository.save(farmerJob);
 
-            Notification notification=new Notification();
+            Notification notification = new Notification();
             notification.setCreatedAt(new Date());
-            notification.setMessage(user.getName()+" gửi yêu cầu cho việc "+job.getName());
+            notification.setMessage(user.getName() + " gửi yêu cầu cho việc " + job.getName());
             notification.setOwner(owner);
             notification.setSender(user.getName());
             notification.setStatus(NoteStatus.UNREAD);
@@ -224,11 +223,23 @@ public class JobServiceImpl implements JobService {
     public BaseResponse completedJob(int jobId) {
 
         try {
-            Job job = jobRepository.getById(jobId);
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
 
+            Job job = jobRepository.getById(jobId);
+            User owner = job.getOwner();
             job.setJobStatus(JobStatus.COMPLETED);
 
             jobRepository.save(job);
+
+            Notification notification = new Notification();
+            notification.setCreatedAt(new Date());
+            notification.setMessage(user.getName() + " đã hoàn thành công viêc " + job.getName());
+            notification.setOwner(owner);
+            notification.setSender(user.getName());
+            notification.setStatus(NoteStatus.UNREAD);
+            notiService.addNewNotification(notification);
 
             JobDTO jobDTO = jobMapping.mapJobtoJobDTO(job);
             return new BaseResponse<>(HttpStatus.OK, "Job completed!", jobDTO);
@@ -242,6 +253,10 @@ public class JobServiceImpl implements JobService {
     public BaseResponse rejectJob(FarmerJobDTO farmerJobDTO, int jobId) {
 
         try {
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
+
             FarmerJobID fjId = new FarmerJobID(jobId, farmerJobDTO.getWorkerId());
             Optional<FarmerJob> farmerJobOpt = fJobRepository.findById(fjId);
 
@@ -249,6 +264,16 @@ public class JobServiceImpl implements JobService {
             farmerJob.setStatus(FarmerJobStatus.REJECTED);
 
             fJobRepository.save(farmerJob);
+            Job job=farmerJob.getJob();
+            User owner=farmerJob.getWorker();
+
+            Notification notification = new Notification();
+            notification.setCreatedAt(new Date());
+            notification.setMessage(user.getName() + " đã từ chối yêu cầu của bạn cho việc " + job.getName());
+            notification.setOwner(owner);
+            notification.setSender(user.getName());
+            notification.setStatus(NoteStatus.UNREAD);
+            notiService.addNewNotification(notification);
 
             farmerJobDTO.setStatus(farmerJob.getStatus().toString());
 
