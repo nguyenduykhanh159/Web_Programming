@@ -57,7 +57,7 @@ public class JobServiceImpl implements JobService {
         for (Job job : jobs) {
             User owner=job.getOwner();
             JobDTO jobDTO = new JobDTO();
-            jobDTO.setName(owner.getUsername());
+            jobDTO.setName(job.getName());
             jobDTO.setId(job.getId());
             jobDTO.setImageUrl(job.getImageUrl());
             jobDTO.setAddress(job.getAddress());
@@ -70,6 +70,7 @@ public class JobServiceImpl implements JobService {
             jobDTO.setArea(job.getWorkplace().getArea());
             jobDTO.setJobStatus(job.getJobStatus().toString());
             jobDTO.setContact(owner.getName());
+            jobDTO.setUsername(owner.getUsername());
             jobDTOs.add(jobDTO);
 
         }

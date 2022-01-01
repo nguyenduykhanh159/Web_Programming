@@ -36,6 +36,9 @@ public class JobDTO {
     @JsonProperty("contact")
     private String contact;
 
+    @JsonProperty("username")
+    private String username;
+
     @JsonProperty("contact_number")
     private String contactNumber;
 
@@ -54,7 +57,6 @@ public class JobDTO {
     @JsonProperty("area")
     private Float area;
 
-    @JsonProperty("status")
-    
+    @JsonProperty("status")    
     private String jobStatus;
 }
