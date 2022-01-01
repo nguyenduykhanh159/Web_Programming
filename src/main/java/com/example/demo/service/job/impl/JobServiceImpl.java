@@ -299,6 +299,7 @@ public class JobServiceImpl implements JobService {
                 jobDTO.setDue(job.getDue());
                 jobDTO.setArea(job.getWorkplace().getArea());
                 jobDTO.setJobStatus(job.getJobStatus().toString());
+                
                 jobDTOs.add(jobDTO);
 
             }
@@ -330,7 +331,8 @@ public class JobServiceImpl implements JobService {
                 farmerJobDTO.setComment(farmerJob.getComment());
                 farmerJobDTO.setReceivedAt(farmerJob.getReceivedAt());
                 farmerJobDTO.setDealPrice(farmerJob.getDealPrice());
-                farmerJobDTO.setUsername(farmer.getName());
+                farmerJobDTO.setUsername(farmer.getUsername());
+                farmerJobDTO.setFullname(farmer.getName());
                 farmerJobDTO.setPhone(farmer.getPhone());
                 farmerJobDTO.setStatus(farmerJob.getStatus().toString());
                 farmerJobDTO.setReceivedAt(farmerJob.getReceivedAt());

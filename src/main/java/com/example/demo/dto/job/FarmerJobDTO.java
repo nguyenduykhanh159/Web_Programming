@@ -17,6 +17,9 @@ public class FarmerJobDTO {
     @JsonProperty("username")
     private String username;
 
+    @JsonProperty("fullname")
+    private String fullname;
+
     @JsonProperty("worker_id")
     private Integer workerId;
 
