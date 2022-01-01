@@ -57,7 +57,7 @@ public class JobServiceImpl implements JobService {
         for (Job job : jobs) {
             User owner=job.getOwner();
             JobDTO jobDTO = new JobDTO();
-            jobDTO.setName(job.getName());
+            jobDTO.setName(owner.getUsername());
             jobDTO.setId(job.getId());
             jobDTO.setImageUrl(job.getImageUrl());
             jobDTO.setAddress(job.getAddress());

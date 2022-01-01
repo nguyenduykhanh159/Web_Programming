@@ -1,12 +1,12 @@
 
 @host=my-happy-farmer.herokuapp.com/api/v1
 
-@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMSIsImlhdCI6MTY0MDkzODA5NSwiZXhwIjoxNjQxMDI0NDk1fQ.6p_T_C5E6PQzP3u2K7co4W4XZLkSsnWVAs0YxP7SAdpGPsCduWoRqymJLPfwCOz2EJTc9AbfxBY77nHsy8UChA
+@token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuaWZ5IiwiaWF0IjoxNjQxMDU1MDg0LCJleHAiOjE2NDExNDE0ODR9.4xq2i0XlmqtOJyRAfWF_U_3TjUwksKyjHzSpLtYnMlpeImpu2GSIXg0xPGhMnWNPjXai1hEfNvJpr9xiV18G8w
 POST https://{{host}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username":"quan1",
+    "username":"quanify",
     "password":"crquan07"
 }
 
@@ -105,16 +105,16 @@ Content-Type: application/json
 Authorization:{{token}}
 
 {
-        "image_url": "no/ủl",
-        "name": "Gặt lúa",
-        "description": "Cần tuyển người đi Gặt lúa",
+        "image_url": "https://image.freepik.com/free-vector/farmer-illustration-concept_119121-4.jpg",
+        "name": "Cần người bón phân",
+        "description": "Cần tuyển người bón phân cho vườn ngô",
         "address": "Thửa ruộng nhà anh A",
         "salary": "500.000",
         "create_At": "2021-12-20",
         "due": "2022-01-01",
         "contact": "anh A",
         "contact_number": "0123456789",
-        "job_detail": "Công việc gồm: gặt lúa, bó lúa và xếp ra xe."
+        "job_detail": "Công việc gồm: bón phân."
 }
 ####
 
