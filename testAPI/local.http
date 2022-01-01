@@ -1,5 +1,5 @@
 @host=localhost:8080/api/v1
- @token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMiIsImlhdCI6MTY0MTA1NjYzNCwiZXhwIjoxNjQxMTQzMDM0fQ.cZgHO5azvgf3C56olvLH1R7AjkvBnTp-wsE4uEpu8mvR5YZJrLxCNUcf_8ud_KJbey-fRVFaBuRv1xpPyn0jCg
+ @token = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMiIsImlhdCI6MTY0MTA2NjM5NCwiZXhwIjoxNjQxMTUyNzk0fQ.4sgGVCH4Uv6qOvxI8WD38u8OaufrU5kbJcI581x2WgVzyQIE96zp-CPs7HNjC9K5BLr18oNglMmf9juDXtYPfg
 ###
 POST http://{{host}}/login HTTP/1.1
 Content-Type: application/json
@@ -131,11 +131,13 @@ Content-Type: application/json
 }
 
 ### accept a job request from a farmer
+@job_id=2
 POST  http://{{host}}/job/assignJob/{{job_id}}
 Content-Type: application/json
+Authorization: {{token}}
 
  {
-      "job_id": 2,
+      "job_id": 1,
       "worker_id": 1,
       "deal_price": 300000.0,
       "comment": "Nhanh chong, hieu qua, chat luong",
@@ -144,7 +146,7 @@ Content-Type: application/json
  }
 
 ### Request to do a job '
-@job_id=1
+@job_id=2
 POST  http://{{host}}/job/receiveJob/{{job_id}}
 Content-Type: application/json
 Authorization: {{token}}
@@ -212,3 +214,7 @@ Authorization: {{token}}
   total_amount:sum,
   cart:payment
 }
+
+###
+GET http://{{host}}/noti HTTP/1.1
+Authorization: {{token}}

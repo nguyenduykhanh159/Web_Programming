@@ -19,6 +19,8 @@ import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.Workplace;
 import com.example.demo.entity.job.Job;
 import com.example.demo.entity.job.JobStatus;
+import com.example.demo.entity.notification.NoteStatus;
+import com.example.demo.entity.notification.Notification;
 import com.example.demo.entity.user.Farmer;
 import com.example.demo.entity.user.FarmerJob;
 import com.example.demo.entity.user.FarmerJobID;
@@ -26,6 +28,7 @@ import com.example.demo.entity.user.FarmerJobStatus;
 import com.example.demo.entity.user.User;
 import com.example.demo.mapping.job.JobMapping;
 import com.example.demo.service.job.JobService;
+import com.example.demo.service.notification.NotiService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +52,9 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private NotiService notiService;
 
     @Override
     public BaseResponse getAllJobs() {
@@ -136,6 +142,11 @@ public class JobServiceImpl implements JobService {
     public BaseResponse assignJob(FarmerJobDTO farmerJobDTO, int jobId) {
 
         try {
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
+
+            User owner = userRepository.findById(farmerJobDTO.getWorkerId()).orElse(null);
             FarmerJobID fjId = new FarmerJobID(jobId, farmerJobDTO.getWorkerId());
             Optional<FarmerJob> farmerJobOpt = fJobRepository.findById(fjId);
             FarmerJob farmerJob = farmerJobOpt.get();
@@ -144,6 +155,15 @@ public class JobServiceImpl implements JobService {
             farmerJob.setStatus(FarmerJobStatus.ACCEPTED);
 
             fJobRepository.save(farmerJob);
+
+            Notification notification = new Notification();
+            notification.setCreatedAt(new Date());
+            notification.setMessage(user.getName() + " đã chấp nhận yêu cầu cho việc "+farmerJob.getJob().getName());
+            notification.setSender(user.getName());
+            notification.setOwner(owner);
+            notification.setStatus(NoteStatus.UNREAD);
+            notiService.addNewNotification(notification);
+
 
             farmerJobDTO.setAcceptedAt(farmerJob.getAcceptedAt());
             farmerJobDTO.setStatus(farmerJob.getStatus().toString());
@@ -167,6 +187,8 @@ public class JobServiceImpl implements JobService {
                     .getPrincipal();
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
+            Job job=jobRepository.findById(jobId).orElse(null);
+            User owner=job.getOwner();
             FarmerJobID fjId = new FarmerJobID(jobId, user.getId());
             FarmerJob farmerJob = new FarmerJob();
             farmerJob.setFarmerJobID(fjId);
@@ -176,6 +198,14 @@ public class JobServiceImpl implements JobService {
             farmerJob.setStatus(FarmerJobStatus.REQUESTING);
 
             fJobRepository.save(farmerJob);
+
+            Notification notification=new Notification();
+            notification.setCreatedAt(new Date());
+            notification.setMessage(user.getName()+" gửi yêu cầu cho việc "+job.getName());
+            notification.setOwner(owner);
+            notification.setSender(user.getName());
+            notification.setStatus(NoteStatus.UNREAD);
+            notiService.addNewNotification(notification);
 
             farmerJobDTO.setJobId(jobId);
             farmerJobDTO.setReceivedAt(farmerJob.getReceivedAt());

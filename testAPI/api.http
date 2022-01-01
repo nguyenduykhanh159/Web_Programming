@@ -110,7 +110,7 @@ Authorization:{{token}}
         "description": "Cần tuyển người bón phân cho vườn ngô",
         "address": "Thửa ruộng nhà anh A",
         "salary": "500.000",
-        "create_At": "2021-12-20",
+        "created_at": "2021-12-20",
         "due": "2022-01-01",
         "contact": "anh A",
         "contact_number": "0123456789",
