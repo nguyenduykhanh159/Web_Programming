@@ -11,6 +11,9 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class NotificationDTO {
 
+    @JsonProperty("id")
+    private int id;
+    
     @JsonProperty("sender")
     private String sender;
 

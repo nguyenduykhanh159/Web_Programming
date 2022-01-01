@@ -9,6 +9,7 @@ import com.example.demo.dao.NotificationRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.notification.NotificationDTO;
 import com.example.demo.entity.CustomUserDetails;
+import com.example.demo.entity.notification.NoteStatus;
 import com.example.demo.entity.notification.Notification;
 import com.example.demo.entity.user.User;
 import com.example.demo.service.notification.NotiService;
@@ -55,6 +56,7 @@ public class NotiServiceImpl implements NotiService {
                 notiDTO.setMessage(notification.getMessage());
                 notiDTO.setSender(notification.getSender());
                 notiDTO.setStatus(notification.getStatus().toString());
+                notiDTO.setId(notification.getId());
                 notficationDTOs.add(notiDTO);
 
             }
@@ -64,6 +66,19 @@ public class NotiServiceImpl implements NotiService {
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Request failed!");
         }
 
+    }
+
+    @Override
+    public void readNotification(int notiId) {
+        try {
+            
+            Notification noti=notiRepository.findById(notiId).orElse(null);
+            noti.setStatus(NoteStatus.READ);
+            notiRepository.save(noti);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e.getCause());
+        }
+        
     }
 
 }
