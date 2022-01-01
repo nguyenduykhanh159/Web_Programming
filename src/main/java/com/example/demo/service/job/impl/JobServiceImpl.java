@@ -55,7 +55,7 @@ public class JobServiceImpl implements JobService {
         List<Job> jobs = jobRepository.findAll();
         List<JobDTO> jobDTOs = new ArrayList<>();
         for (Job job : jobs) {
-            User owner=job.getOwner();
+            User owner = job.getOwner();
             JobDTO jobDTO = new JobDTO();
             jobDTO.setName(job.getName());
             jobDTO.setId(job.getId());
@@ -299,7 +299,7 @@ public class JobServiceImpl implements JobService {
                 jobDTO.setDue(job.getDue());
                 jobDTO.setArea(job.getWorkplace().getArea());
                 jobDTO.setJobStatus(job.getJobStatus().toString());
-                
+
                 jobDTOs.add(jobDTO);
 
             }
@@ -315,11 +315,15 @@ public class JobServiceImpl implements JobService {
     public BaseResponse getCreatedJobDetail(int jobId) {
 
         try {
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
             CreatedJobDTO createdJobDTO = new CreatedJobDTO();
 
             Job job = jobRepository.findById(jobId).get();
 
             JobDTO jobDTO = jobMapping.mapJobtoJobDTO(job);
+            jobDTO.setUsername(user.getUsername());
             createdJobDTO.setJob(jobDTO);
 
             Collection<FarmerJob> farmerJobs = job.getContacts();
