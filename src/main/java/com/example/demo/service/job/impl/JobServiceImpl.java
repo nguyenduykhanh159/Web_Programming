@@ -108,6 +108,7 @@ public class JobServiceImpl implements JobService {
 
             Job job = jobMapping.mapJobDtoToJob(jobDTO);
             job.setContact(user.getName());
+            job.setContactNumber(user.getPhone());
             job.setOwner(user);
 
             Workplace workplace = new Workplace();
