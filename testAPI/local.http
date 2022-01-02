@@ -218,3 +218,6 @@ Authorization: {{token}}
 ###
 GET http://{{host}}/noti HTTP/1.1
 Authorization: {{token}}
+
+###
+GET  http://{{host}}/noti/read/1

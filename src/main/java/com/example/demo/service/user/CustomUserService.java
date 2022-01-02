@@ -153,7 +153,9 @@ public class CustomUserService implements UserDetailsService, UserService {
             user_response.setName(user.getName());
             user_response.setEmail(user.getEmail());
             user_response.setUsername(user.getUsername());
-
+            user_response.setPhone(user.getPhone());
+            user_response.setCreatedAt(user.getCreatedAt());
+            
             authenticationModel.setUser(user_response);
             authenticationModel.setToken(token);
 
