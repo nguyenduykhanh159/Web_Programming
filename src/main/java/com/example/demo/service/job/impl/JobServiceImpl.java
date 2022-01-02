@@ -69,7 +69,6 @@ public class JobServiceImpl implements JobService {
             jobDTO.setAddress(job.getAddress());
             jobDTO.setCreatedAt(job.getCreatedAt());
             jobDTO.setContactNumber(job.getContactNumber());
-            jobDTO.setJobDetail(job.getJobDetail());
             jobDTO.setSalary(job.getSalary());
             jobDTO.setDescription(job.getDescription());
             jobDTO.setDue(job.getDue());
@@ -309,7 +308,6 @@ public class JobServiceImpl implements JobService {
                 jobDTO.setCreatedAt(job.getCreatedAt());
                 jobDTO.setContact(job.getContact());
                 jobDTO.setContactNumber(job.getContactNumber());
-                jobDTO.setJobDetail(job.getJobDetail());
                 jobDTO.setSalary(job.getSalary());
                 jobDTO.setDescription(job.getDescription());
                 jobDTO.setDue(job.getDue());
@@ -349,7 +347,6 @@ public class JobServiceImpl implements JobService {
                 jobDTO.setCreatedAt(job.getCreatedAt());
                 jobDTO.setContact(job.getContact());
                 jobDTO.setContactNumber(job.getContactNumber());
-                jobDTO.setJobDetail(job.getJobDetail());
                 jobDTO.setSalary(job.getSalary());
                 jobDTO.setDescription(job.getDescription());
                 jobDTO.setDue(job.getDue());

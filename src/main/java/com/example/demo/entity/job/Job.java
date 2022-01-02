@@ -57,11 +57,8 @@ public class Job {
     @Column(name = "contact_number")
     private String contactNumber;
 
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition = "TEXT")
     private String description;
-
-    @Column(name = "job_detail")
-    private String jobDetail;
 
     @Column(name = "due")
     @Temporal(TemporalType.DATE)

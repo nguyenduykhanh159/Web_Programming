@@ -34,7 +34,6 @@ public class JobMappingImpl implements JobMapping {
         jobDTO.setCreatedAt(job.getCreatedAt());
         jobDTO.setContact(job.getContact());
         jobDTO.setContactNumber(job.getContactNumber());
-        jobDTO.setJobDetail(job.getJobDetail());
         jobDTO.setSalary(job.getSalary());
         jobDTO.setDescription(job.getDescription());
         jobDTO.setDue(job.getDue());
