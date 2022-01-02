@@ -21,6 +21,7 @@ public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
         farmer.setPassword(userDTO.getPassword());
         farmer.setPhone(userDTO.getPhone());
         farmer.setEmail(userDTO.getEmail());
+        farmer.setImageUrl(userDTO.getImageUrl());
         farmer.setAge(userDTO.getAge());
         farmer.setCreatedAt(userDTO.getCreatedAt()!=null?userDTO.getCreatedAt():new Date());
         return farmer;
@@ -36,6 +37,7 @@ public class FarmerMappingImpl implements UserMapping<Farmer,UserDTO>  {
         farmer.setPhone(user.getPhone());
         farmer.setEmail(user.getEmail());
         farmer.setAge(user.getAge()); 
+        farmer.setImageUrl(user.getImageUrl());
         return farmer;
     }
 

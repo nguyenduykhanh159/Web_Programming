@@ -45,6 +45,9 @@ public class User {
     @Column(name = "created_at")
     private Date createdAt;
 
+    @Column(name="image_url")
+    private String imageUrl;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Order> orders;
 

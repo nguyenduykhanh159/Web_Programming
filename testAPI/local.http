@@ -20,8 +20,9 @@ Content-Type: application/json
 "email": "quan1@gmail.com",
 "address": "83 Xa Dan",
 "phone": "0974654701",
-"type":"FARMER",
-"age":22
+"image_url":"https://photos.google.com/photo/AF1QipOby46HUzHh47UC8Wawljff8-RBrZFFJoeVPyDo",
+"age":22,
+"type":"FARMER"
 }
 ###
 GET http://{{host}}/remove/6 HTTP/1.1
