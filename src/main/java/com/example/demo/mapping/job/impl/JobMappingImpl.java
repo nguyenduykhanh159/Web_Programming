@@ -38,7 +38,6 @@ public class JobMappingImpl implements JobMapping {
         jobDTO.setSalary(job.getSalary());
         jobDTO.setDescription(job.getDescription());
         jobDTO.setDue(job.getDue());
-        jobDTO.setArea(job.getWorkplace().getArea());
         jobDTO.setJobStatus(job.getJobStatus().toString());
         return jobDTO;
        

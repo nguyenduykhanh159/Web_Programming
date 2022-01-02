@@ -109,7 +109,7 @@ Authorization: {{token}}
 ### add a job
 POST  http://{{host}}/job HTTP/1.1
 Content-Type: application/json
-# Authorization: {{token}}
+Authorization: {{token}}
 
 
 {
@@ -118,12 +118,8 @@ Content-Type: application/json
         "description": "Cần tuyển người đi Gặt lúa",
         "address": "Thửa ruộng nhà anh A",
         "salary": "500.000",
-        "create_At": "2021-12-20",
-        "due": "2022-01-01",
-        "contact": "anh A",
-        "contact_number": "0123456789",
-        "job_detail": "Công việc gồm: gặt lúa, bó lúa và xếp ra xe.",
-        "area":120.5
+        "due": "2022-01-01"
+       
 }
 
 ### get job detaieyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFucCIsImlhdCI6MTY0MDUzNDIzOCwiZXhwIjoxNjQwNjIwNjM4fQ.5SHsn2qZHH3fA4IrKrupR3y-LnOiq9gg-IFS1roX4hkh-wu7A7PmUuC-wumNGLsu4ckB0rObs0-FypchUowmbA

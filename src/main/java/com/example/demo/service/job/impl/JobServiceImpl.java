@@ -113,7 +113,7 @@ public class JobServiceImpl implements JobService {
 
             Workplace workplace = new Workplace();
             workplace.setAddress(jobDTO.getAddress());
-            workplace.setArea(jobDTO.getArea());
+           
             job.setCreatedAt(new Date());
             job.setWorkplace(workplace);
 
