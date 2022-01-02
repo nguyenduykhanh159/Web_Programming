@@ -14,11 +14,8 @@ public class JobMappingImpl implements JobMapping {
     public Job mapJobDtoToJob(JobDTO jobDTO) {
         Job job=new Job();
         job.setName(jobDTO.getName());
-        job.setId(jobDTO.getId());
         job.setImageUrl(jobDTO.getImageUrl());
         job.setAddress(jobDTO.getAddress());
-        job.setContactNumber(jobDTO.getContactNumber());
-        job.setJobDetail(jobDTO.getJobDetail());
         job.setSalary(jobDTO.getSalary());
         job.setDescription(jobDTO.getDescription());
         job.setDue(jobDTO.getDue());
