@@ -9,5 +9,6 @@ public interface UserService {
     BaseResponse registerUser(UserDTO userDTO);
     BaseResponse removeUser(int userId);
     BaseResponse login(UserDTO userDTO);
-    BaseResponse updateProfile(UserDTO userDTO); 
+    BaseResponse updateProfile(UserDTO userDTO);
+    BaseResponse profile(); 
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service.user;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import com.example.demo.base.response.AuthenticationModel;
 import com.example.demo.base.response.AuthenticationResponse;
@@ -9,10 +10,15 @@ import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.config.jwt.JwtTokenProvider;
 import com.example.demo.dao.CartRepository;
 import com.example.demo.dao.UserRepository;
+import com.example.demo.dto.user.Profile;
 import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.cart.Cart;
+import com.example.demo.entity.job.Job;
+import com.example.demo.entity.order.Order;
+import com.example.demo.entity.order.OrderProduct;
 import com.example.demo.entity.user.Farmer;
+import com.example.demo.entity.user.FarmerJob;
 import com.example.demo.entity.user.Society;
 import com.example.demo.entity.user.User;
 import com.example.demo.entity.user.UserType;
@@ -181,7 +187,55 @@ public class CustomUserService implements UserDetailsService, UserService {
 
         } catch (Exception e) {
             log.error(e.getMessage(), e.getCause());
-            return new BaseResponse<>(HttpStatus.BAD_REQUEST,"Update failed!");
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Update failed!");
+        }
+
+    }
+
+    @Override
+    public BaseResponse profile() {
+        try {
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
+
+            Integer createdJob=user.getCreatedJobs().size();
+            Integer receivedJob=user.getDoJobs().size();
+
+            Integer numOrders=user.getOrders().size();
+            Integer numProducts=0;
+            Collection<Order> orders=user.getOrders();
+            for(Order order:orders)
+            {
+                Collection<OrderProduct> orderProducts = order.getProducts();
+                for(OrderProduct orderProduct:orderProducts)
+                {
+                    numProducts+=orderProduct.getQuanity();
+                }
+            }
+            
+
+            UserDTO user_response = new UserDTO();
+            user_response.setAddress(user.getAddress());
+            user_response.setName(user.getName());
+            user_response.setEmail(user.getEmail());
+            user_response.setUsername(user.getUsername());
+            user_response.setPhone(user.getPhone());
+            user_response.setCreatedAt(user.getCreatedAt());
+            user_response.setImageUrl(user.getImageUrl());
+            user_response.setDateOfBirth(user.getDateOfBirth());
+            Profile profile=new Profile();
+            profile.setUser(user_response);
+            profile.setCreatedJob(createdJob);
+            profile.setReceivedJob(receivedJob);
+            profile.setNumberOfOrders(numOrders);
+            profile.setNumOfProducts(numProducts);
+            
+             return new BaseResponse<>(HttpStatus.OK, "Your profile!",profile);
+
+        } catch (Exception e) {
+            log.error(e.getMessage(), e.getCause());
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Get failed!");
         }
        
     }

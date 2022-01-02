@@ -42,6 +42,9 @@ public class UserDTO {
     @JsonProperty("image_url")
     private String imageUrl;
 
+    @JsonProperty("date_of_birth")
+    private Date dateOfBirth;
+    
     @JsonProperty("industry_code")
     private String industryCode;
 

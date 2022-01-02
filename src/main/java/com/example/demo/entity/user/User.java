@@ -42,6 +42,9 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name="date_of_birth")
+    private Date dateOfBirth;
+
     @Column(name = "created_at")
     private Date createdAt;
 

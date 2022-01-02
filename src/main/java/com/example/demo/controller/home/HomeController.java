@@ -44,5 +44,12 @@ public class HomeController {
     public BaseResponse updateProfile(@RequestBody UserDTO userDTO)
     {
         return customUserService.updateProfile(userDTO);
+    
+    }
+
+    @GetMapping("/profile")
+    public BaseResponse getProfile()
+    {
+        return customUserService.profile();
     }
 }
