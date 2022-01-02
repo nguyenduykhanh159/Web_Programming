@@ -25,10 +25,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://{{host}}/user/updateProfile
+POST http://{{host}}/user/updateProfile HTTP/1.1
+Content-Type: application/json
 Authorization: {{token}}
+
 {
-  "image_url":
+  "image_url":"https://photos.google.com/photo/AF1QipOby46HUzHh47UC8Wawljff8-RBrZFFJoeVPyDo"
 }
 ###
 GET http://{{host}}/remove/6 HTTP/1.1
