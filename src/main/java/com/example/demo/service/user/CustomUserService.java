@@ -17,6 +17,7 @@ import com.example.demo.entity.user.Society;
 import com.example.demo.entity.user.User;
 import com.example.demo.entity.user.UserType;
 import com.example.demo.mapping.user.UserMapping;
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,7 +73,7 @@ public class CustomUserService implements UserDetailsService, UserService {
 
     {
         try {
-           
+
             UserDTO user_respose = new UserDTO();
             user_respose.setAddress(userDTO.getAddress());
             user_respose.setName(userDTO.getName());
@@ -90,7 +91,7 @@ public class CustomUserService implements UserDetailsService, UserService {
 
                 cartRepository.save(cart);
                 userRepository.save(farmer);
-               
+
             } else if (UserType.valueOf(userType) == UserType.SOCIETY) {
                 Society society = societyMapping.mapUserDtoToUser(userDTO);
                 Cart cart = new Cart();
@@ -100,11 +101,10 @@ public class CustomUserService implements UserDetailsService, UserService {
                 cartRepository.save(cart);
                 society.setCart(cart);
                 userRepository.save(society);
-              
+
             }
             AuthenticationModel authenticationModel = new AuthenticationModel();
             authenticationModel.setUser(user_respose);
-        
 
             return new AuthenticationResponse(HttpStatus.OK, "Register success", authenticationModel);
         } catch (Exception e) {
@@ -143,12 +143,12 @@ public class CustomUserService implements UserDetailsService, UserService {
                     new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            CustomUserDetails userDetails=(CustomUserDetails) authentication.getPrincipal();
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
             String token = jwtTokenProvider.generateToken((userDetails));
             AuthenticationModel authenticationModel = new AuthenticationModel();
 
-            User user=userDetails.getUser();
-            UserDTO user_response=new UserDTO();
+            User user = userDetails.getUser();
+            UserDTO user_response = new UserDTO();
             user_response.setAddress(user.getAddress());
             user_response.setName(user.getName());
             user_response.setEmail(user.getEmail());
@@ -156,7 +156,7 @@ public class CustomUserService implements UserDetailsService, UserService {
             user_response.setPhone(user.getPhone());
             user_response.setCreatedAt(user.getCreatedAt());
             user_response.setImageUrl(user.getImageUrl());
-            
+
             authenticationModel.setUser(user_response);
             authenticationModel.setToken(token);
 
@@ -167,5 +167,22 @@ public class CustomUserService implements UserDetailsService, UserService {
 
             return new BaseResponse<>(HttpStatus.NOT_FOUND, e.getMessage().toString());
         }
+    }
+
+    @Override
+    public BaseResponse updateProfile(UserDTO userDTO) {
+        try {
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            User user = userRepository.findById(userDetails.getUser().getId()).get();
+            user.setImageUrl(userDTO.getImageUrl());
+            userRepository.save(user);
+            return new BaseResponse<>(HttpStatus.OK, "Update profile successfull!");
+
+        } catch (Exception e) {
+            log.error(e.getMessage(), e.getCause());
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST,"Update failed!");
+        }
+       
     }
 }

@@ -40,4 +40,9 @@ public class HomeController {
         return customUserService.removeUser(userId);
     }
 
+    @PostMapping("/user/updateProfile")
+    public BaseResponse updateProfile(@RequestBody UserDTO userDTO)
+    {
+        return customUserService.updateProfile(userDTO);
+    }
 }
