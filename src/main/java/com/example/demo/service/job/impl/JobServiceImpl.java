@@ -393,6 +393,8 @@ public class JobServiceImpl implements JobService {
                 farmerJobDTO.setStatus(farmerJob.getStatus().toString());
                 farmerJobDTO.setReceivedAt(farmerJob.getReceivedAt());
                 farmerJobDTO.setWorkerId(farmer.getId());
+                farmerJobDTO.setImageUrl(farmer.getImageUrl());
+                
 
                 createdJobDTO.getReceivers().add(farmerJobDTO);
 

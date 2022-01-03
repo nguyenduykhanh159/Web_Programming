@@ -208,11 +208,7 @@ Authorization: {{token}}
     {
       "product_id": 1,
       "quantity":1
-    },
-    {
-      "product_id": 2,
-      "quantiy":2
-    } 
+    }
   ]   
 }
 
