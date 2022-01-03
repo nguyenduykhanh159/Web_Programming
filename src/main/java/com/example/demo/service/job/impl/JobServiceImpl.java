@@ -351,6 +351,7 @@ public class JobServiceImpl implements JobService {
                 jobDTO.setDue(job.getDue());
                 jobDTO.setArea(job.getWorkplace().getArea());
                 jobDTO.setJobStatus(job.getJobStatus().toString());
+                jobDTO.setRequestStatus(farmerJob.getStatus().toString());
 
                 jobDTOs.add(jobDTO);
 

@@ -59,4 +59,7 @@ public class JobDTO {
 
     @JsonProperty("status")    
     private String jobStatus;
+
+    @JsonProperty("request_status")
+    private String requestStatus;
 }
