@@ -17,6 +17,7 @@ import com.example.demo.dto.cart.CartProductDTO;
 import com.example.demo.dto.order.OrderDTO;
 import com.example.demo.dto.order.OrderProductDTO;
 import com.example.demo.dto.product.ProductDTO;
+import com.example.demo.dto.user.UserDTO;
 import com.example.demo.entity.CustomUserDetails;
 import com.example.demo.entity.cart.Cart;
 import com.example.demo.entity.order.Order;
@@ -54,16 +55,26 @@ public class OrderServiceImpl implements OrderService {
 
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
+            UserDTO user_response = new UserDTO();
+            user_response.setAddress(user.getAddress());
+            user_response.setName(user.getName());
+            user_response.setEmail(user.getEmail());
+            user_response.setUsername(user.getUsername());
+            user_response.setPhone(user.getPhone());
+            user_response.setCreatedAt(user.getCreatedAt());
+            user_response.setImageUrl(user.getImageUrl());
+
             Order order = new Order();
             order.setCreatedAt(new Date());
             order.setUser(user);
             order.setTotalAmount(cartDto.getTotalAmount());
             orderRepository.save(order);
-           
+
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setCreatedAt(order.getCreatedAt());
             orderDTO.setProducts(new ArrayList<>());
             orderDTO.setTotalAmount(cartDto.getTotalAmount());
+            orderDTO.setUser(user_response);
 
             for (CartProductDTO cartProductDto : cartDto.getCart()) {
                 OrderProductID odid = new OrderProductID(order.getId(), cartProductDto.getId());
@@ -83,7 +94,6 @@ public class OrderServiceImpl implements OrderService {
                         .build();
                 orderDTO.getProducts().add(productDTO);
             }
-            
 
             return new BaseResponse<>(HttpStatus.OK, "Place success!", orderDTO);
         } catch (Exception e) {
@@ -106,15 +116,14 @@ public class OrderServiceImpl implements OrderService {
                 orderDTO.setCreatedAt(order.getCreatedAt());
                 orderDTO.setProducts(new ArrayList<>());
 
-                Collection<OrderProduct> products=order.getProducts();
-                for(OrderProduct orderProduct:products)
-                {
-                     OrderProductDTO productDTO = OrderProductDTO.builder()
-                        .name(orderProduct.getProduct().getName())
-                        .price(orderProduct.getProduct().getPrice())
-                        .quantity(orderProduct.getQuanity())
-                        .build();
-                        orderDTO.getProducts().add(productDTO);
+                Collection<OrderProduct> products = order.getProducts();
+                for (OrderProduct orderProduct : products) {
+                    OrderProductDTO productDTO = OrderProductDTO.builder()
+                            .name(orderProduct.getProduct().getName())
+                            .price(orderProduct.getProduct().getPrice())
+                            .quantity(orderProduct.getQuanity())
+                            .build();
+                    orderDTO.getProducts().add(productDTO);
                 }
                 orderDTOs.add(orderDTO);
             }

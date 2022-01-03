@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.JoinColumn;
 
+import com.example.demo.dto.user.UserDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,4 +24,7 @@ public class OrderDTO {
 
     @JsonProperty("total_amount")
     private Float totalAmount;
+
+    @JsonProperty("user")
+    private UserDTO user;
 }

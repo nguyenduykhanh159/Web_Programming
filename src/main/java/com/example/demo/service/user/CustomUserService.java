@@ -224,6 +224,7 @@ public class CustomUserService implements UserDetailsService, UserService {
             user_response.setCreatedAt(user.getCreatedAt());
             user_response.setImageUrl(user.getImageUrl());
             user_response.setDateOfBirth(user.getDateOfBirth());
+            
             Profile profile=new Profile();
             profile.setUser(user_response);
             profile.setCreatedJob(createdJob);

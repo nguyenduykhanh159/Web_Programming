@@ -9,7 +9,6 @@ import java.util.Optional;
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.base.response.NotFoundResponse;
 import com.example.demo.dao.FarmerJobRepository;
-import com.example.demo.dao.FarmerRepository;
 import com.example.demo.dao.JobRepository;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.dto.job.CreatedJobDTO;
