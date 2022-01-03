@@ -226,6 +226,12 @@ public class JobServiceImpl implements JobService {
                     .getPrincipal();
             User user = userRepository.findById(userDetails.getUser().getId()).get();
 
+            FarmerJobID fjId=new FarmerJobID(jobId,user.getId());
+
+            FarmerJob farmerJob=fJobRepository.findById(fjId).orElse(null);
+            farmerJob.setStatus(FarmerJobStatus.COMPLETED);
+            fJobRepository.save(farmerJob);
+            
             Job job = jobRepository.getById(jobId);
             User owner = job.getOwner();
             job.setJobStatus(JobStatus.COMPLETED);
