@@ -7,4 +7,5 @@ public interface CartService {
     BaseResponse getCartInfo();
     BaseResponse addProductToCart(CartProductDTO cartProductDTO);
     BaseResponse removeProductFromCart(CartProductDTO cartProductDTO);
+    BaseResponse removeAllProductsFromCart();
 }

@@ -88,6 +88,7 @@ public class JobServiceImpl implements JobService {
         try {
             Job job = jobRepository.getById(jobId);
             JobDTO jobDTO = jobMapping.mapJobtoJobDTO(job);
+            jobDTO.setContact(job.getOwner().getUsername());
             return new BaseResponse<JobDTO>(HttpStatus.OK, "All jobs", jobDTO);
         } catch (Exception e) {
             return new NotFoundResponse(HttpStatus.NOT_FOUND, e.getMessage());

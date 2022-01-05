@@ -28,12 +28,12 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Collection<CartProduct> products;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", unique = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

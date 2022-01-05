@@ -37,4 +37,10 @@ public class CartController {
     {
         return cartService.removeProductFromCart(cartProductDTO);
     }
+
+    @GetMapping("/removeAll")
+    public BaseResponse removeAllProductsFromCart()
+    {
+        return cartService.removeAllProductsFromCart();
+    }
 }

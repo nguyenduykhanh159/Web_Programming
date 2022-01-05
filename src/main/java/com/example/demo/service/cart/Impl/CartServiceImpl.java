@@ -1,9 +1,12 @@
 package com.example.demo.service.cart.Impl;
 
+
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.dao.CartProductRepository;
@@ -20,11 +23,11 @@ import com.example.demo.entity.user.User;
 import com.example.demo.mapping.cart.Impl.CartMappingImpl;
 import com.example.demo.service.cart.CartService;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.util.Lists;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +50,9 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartMappingImpl cartMapping;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public BaseResponse getCartInfo() {
@@ -104,7 +110,7 @@ public class CartServiceImpl implements CartService {
             Cart cart = user.getCart();
             return cart;
         } catch (Exception e) {
-            e.getStackTrace();
+            log.error(e.getMessage(), e.getCause());
             return null;
         }
 
@@ -127,5 +133,33 @@ public class CartServiceImpl implements CartService {
 
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed!");
         }
+    }
+
+    @Override
+    @Transactional
+    public BaseResponse removeAllProductsFromCart() {
+        try {
+
+            Cart cart = getCart();
+
+           
+            Collection<CartProduct> cartProducts = cart.getProducts();
+
+            for (CartProduct cartProduct : cartProducts) {
+               
+                entityManager.remove(cartProduct);
+            }
+           
+
+          
+            return new BaseResponse<>(HttpStatus.OK, "Remove all product");
+
+        } catch (
+
+        Exception e) {
+            log.error(e.getMessage(), e.getCause());
+            return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Remove failed");
+        }
+
     }
 }

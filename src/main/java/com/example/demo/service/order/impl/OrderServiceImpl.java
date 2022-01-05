@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.example.demo.base.response.BaseResponse;
+import com.example.demo.dao.CartProductRepository;
 import com.example.demo.dao.OrderProductRepository;
 import com.example.demo.dao.OrderRepository;
 import com.example.demo.dao.ProductRepository;
@@ -45,6 +46,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderProductRepository orderProductRepository;
 
     @Autowired
+    private CartProductRepository cartProductRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Override
@@ -54,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
                     .getPrincipal();
 
             User user = userRepository.findById(userDetails.getUser().getId()).get();
+            Cart cart=user.getCart();
 
             UserDTO user_response = new UserDTO();
             user_response.setAddress(user.getAddress());
@@ -85,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
                 orderProduct.setOrder(order);
                 orderProduct.setProduct(product);
                 orderProductRepository.save(orderProduct);
+                
 
                 // Return value
                 OrderProductDTO productDTO = OrderProductDTO.builder()

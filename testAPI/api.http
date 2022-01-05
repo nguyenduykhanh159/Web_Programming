@@ -24,6 +24,9 @@ Content-Type: application/json
 "type":"FARMER",
 "age":22
 }
+####
+GET  https://{{host}}/profile HTTP/1.1
+Authorization: {{token}}
 // Farmer API
 ### get all farmers 
 GET https://{{host}}/user/farmer HTTP/1.1
@@ -80,12 +83,12 @@ POST https://{{host}}/product HTTP/1.1
 Content-Type: application/json
 
 {
-    "image_url": "no/url",
-    "category": "rau",
-    "expiration_date": "2021-12-20",
-    "name": "Rau huu co",
-    "price": 500.0,
-    "discount": 0.0,
+    "image_url": "https://cf.shopee.vn/file/330f8dc7a4e32c9785fbc030ce233aa6",
+    "category": "Hạt giống",
+    "expiration_date": "2022-12-20",
+    "name": "Hạt giống cỏ lúa mì hữu cơ",
+    "price": 100000,
+    "discount": 60000,
     "quantity": 100,
     "description": "khopng description"
 }

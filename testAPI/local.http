@@ -177,7 +177,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-      "product_id": 1,
+      "product_id": 2,
       "bought_quantity":30
       
 }
@@ -192,6 +192,10 @@ Authorization: {{token}}
 
       
 }
+
+###
+GET http://{{host}}/cart/removeAll HTTP/1.1
+Authorization: {{token}}
 
 // Place order
 ####

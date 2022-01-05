@@ -25,7 +25,7 @@ public class CartProduct {
     @Column(name = "bought_quantity")
     private Integer boughtQuantity;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @MapsId("cart_id")
     @JoinColumn(name = "cart_id")
     @EqualsAndHashCode.Exclude
