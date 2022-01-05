@@ -1,13 +1,11 @@
 package com.example.demo.controller.job;
 
 
-import java.util.List;
 
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.dto.job.FarmerJobDTO;
 import com.example.demo.dto.job.JobDTO;
 import com.example.demo.service.job.JobService;
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
