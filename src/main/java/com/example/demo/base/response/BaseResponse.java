@@ -13,13 +13,9 @@ import lombok.Data;
 
 public class BaseResponse<T> extends ResponseEntity<BaseResponse.ResponseBody<T>> {
 
-    public BaseResponse(HttpStatus status,String message,List<T> data)
-    {
-        super(new ResponseBody<>(status.value(),message,data),status);
-    }
     public BaseResponse(HttpStatus status,String message,T data)
     {
-        super(new ResponseBody<>(status.value(),message,Arrays.asList(data)),status);
+        super(new ResponseBody<>(status.value(),message,data),status);
     }
     public BaseResponse(HttpStatus status,String message)
     {
@@ -35,7 +31,7 @@ public class BaseResponse<T> extends ResponseEntity<BaseResponse.ResponseBody<T>
         private String message;
 
         @JsonProperty("data")
-        private List<T> data;
+        private T data;
 
         public ResponseBody(int code, String msg) {
 			super();

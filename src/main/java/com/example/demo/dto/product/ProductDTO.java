@@ -16,12 +16,12 @@ public class ProductDTO {
     @JsonProperty("image_url")
     private String imageUrl;
 
+    @JsonProperty("sale")
+    private int sale;
+
     @JsonProperty("category")
     private String category;
 
-    @JsonProperty("sale")
-    private int sale;
-    
     @JsonProperty("expiration_date")
     private Date expirationDate;
 

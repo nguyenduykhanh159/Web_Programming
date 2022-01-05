@@ -8,7 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "workplace")
@@ -28,11 +31,10 @@ public class Workplace {
 
    // n workplace can be owned by 1 farmer
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name = "farmer_id")
     private Farmer farmer;
 
     @OneToMany(mappedBy = "workplace")
-    private Set<Job> jobs=new HashSet<>();
+    private Collection<Job> jobs;
  
 }

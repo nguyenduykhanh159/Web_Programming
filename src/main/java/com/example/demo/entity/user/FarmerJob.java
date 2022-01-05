@@ -8,6 +8,8 @@ import com.example.demo.entity.job.Job;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity(name="farmer_job")
 @Data
@@ -37,14 +39,16 @@ public class FarmerJob {
     // 1 farmer can have n farmer job
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @MapsId("worker_id")
-    @JsonIgnore
     @JoinColumn(name = "worker_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Farmer worker;
 
     // 1 job can have n farmer job
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @MapsId("job_id")
-    @JsonIgnore
     @JoinColumn(name="job_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Job job;
 }

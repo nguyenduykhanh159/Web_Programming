@@ -1,7 +1,6 @@
 package com.example.demo.controller.job;
 
 
-import java.util.List;
 
 import com.example.demo.base.response.BaseResponse;
 import com.example.demo.dto.job.FarmerJobDTO;
@@ -15,12 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-
-@Api(value = "Swagger2DemoRestController", description = "REST Apis related to Student Entity!!!!")
 @RestController
 @RequestMapping("/job")
 public class JobController {
@@ -40,10 +35,28 @@ public class JobController {
         return jobService.getJob(jobId);
     }
 
+    @GetMapping("/createdJob")
+    public BaseResponse createdJob()
+    {
+        return jobService.getCreatedJobs();
+    }
+
+    @GetMapping("/createdJob/{id}")
+    public BaseResponse createdJobDetail(@PathVariable("id") Integer jobId)
+    {
+        return jobService.getCreatedJobDetail(jobId);
+    }
+    
+    @GetMapping("/receivedJob")
+    public BaseResponse receivedJob()
+    {
+        return jobService.getReceivedJobs();
+    }
+
     @PostMapping
     public BaseResponse addJob(@RequestBody JobDTO job) {
         
-        return jobService.addJob(job);
+        return jobService.createJob(job);
     }
 
     @DeleteMapping("/{id}")
@@ -73,4 +86,5 @@ public class JobController {
     {
         return jobService.receiveJob(farmerJobDTO,jobId);
     }
+    
 }

@@ -14,13 +14,8 @@ public class JobMappingImpl implements JobMapping {
     public Job mapJobDtoToJob(JobDTO jobDTO) {
         Job job=new Job();
         job.setName(jobDTO.getName());
-        job.setId(jobDTO.getId());
         job.setImageUrl(jobDTO.getImageUrl());
         job.setAddress(jobDTO.getAddress());
-        job.setCreateAt(jobDTO.getCreatedAt());
-        job.setContact(jobDTO.getContact());
-        job.setContactNumber(jobDTO.getContactNumber());
-        job.setJobDetail(jobDTO.getJobDetail());
         job.setSalary(jobDTO.getSalary());
         job.setDescription(jobDTO.getDescription());
         job.setDue(jobDTO.getDue());
@@ -30,19 +25,18 @@ public class JobMappingImpl implements JobMapping {
 
     @Override
     public JobDTO mapJobtoJobDTO(Job job) {
+        
         JobDTO jobDTO=new JobDTO();
         jobDTO.setName(job.getName());
         jobDTO.setId(job.getId());
         jobDTO.setImageUrl(job.getImageUrl());
         jobDTO.setAddress(job.getAddress());
-        jobDTO.setCreatedAt(job.getCreateAt());
+        jobDTO.setCreatedAt(job.getCreatedAt());
         jobDTO.setContact(job.getContact());
         jobDTO.setContactNumber(job.getContactNumber());
-        jobDTO.setJobDetail(job.getJobDetail());
         jobDTO.setSalary(job.getSalary());
         jobDTO.setDescription(job.getDescription());
         jobDTO.setDue(job.getDue());
-        jobDTO.setArea(job.getWorkplace().getArea());
         jobDTO.setJobStatus(job.getJobStatus().toString());
         return jobDTO;
        

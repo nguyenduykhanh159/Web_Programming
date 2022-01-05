@@ -14,6 +14,15 @@ public class FarmerJobDTO {
     @JsonProperty("job_id")
     private Integer jobId;
 
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("fullname")
+    private String fullname;
+
+    @JsonProperty("image_url")
+    private String imageUrl;
+
     @JsonProperty("worker_id")
     private Integer workerId;
 
@@ -32,4 +41,7 @@ public class FarmerJobDTO {
 
     @JsonProperty("status")
     private String status;
+
+    @JsonProperty("phone")
+    private String phone;
 }
