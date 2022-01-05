@@ -23,12 +23,7 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
-
-    @Autowired
-    private OrderRepository orderRepo;
-
-    @Autowired
-    private ModelMapper modelMapper;
+   
 
     @PostMapping
     public BaseResponse placeOrder(@RequestBody CartDTO cartDto) {
