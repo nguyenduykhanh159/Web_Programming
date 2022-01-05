@@ -17,4 +17,7 @@ public class OrderProductDTO {
 
     @JsonProperty("quantity")
     private int quantity;
+
+    @JsonProperty("iamge_url")
+    private String imageUrl;
 }

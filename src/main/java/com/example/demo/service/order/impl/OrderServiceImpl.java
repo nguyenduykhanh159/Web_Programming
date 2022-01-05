@@ -97,6 +97,7 @@ public class OrderServiceImpl implements OrderService {
                         .name(product.getName())
                         .price(product.getPrice())
                         .quantity(cartProductDto.getQuantity())
+                        .imageUrl(product.getImageUrl())
                         .build();
                 orderDTO.getProducts().add(productDTO);
             }
