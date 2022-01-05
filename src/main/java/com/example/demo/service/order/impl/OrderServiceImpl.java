@@ -2,7 +2,7 @@ package com.example.demo.service.order.impl;
 
 import java.util.List;
 
-import com.example.demo.dto.OrderDTO;
+import com.example.demo.dto.order.OrderDTO;
 import com.example.demo.service.order.OrderService;
 
 import org.springframework.stereotype.Service;

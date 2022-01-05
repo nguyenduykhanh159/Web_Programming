@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.dto.OrderDTO;
+import com.example.demo.dto.order.OrderDTO;
 import com.example.demo.service.order.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
