@@ -2,18 +2,21 @@ package com.example.demo.dto.job;
 
 import java.util.Date;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.print.attribute.standard.JobState;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class JobDTO {
+    
     @JsonProperty("id")
     private int id;
 
@@ -27,10 +30,14 @@ public class JobDTO {
     private String description;
 
     @JsonProperty("created_at")
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
 
     @JsonProperty("contact")
     private String contact;
+
+    @JsonProperty("username")
+    private String username;
 
     @JsonProperty("contact_number")
     private String contactNumber;
@@ -50,7 +57,9 @@ public class JobDTO {
     @JsonProperty("area")
     private Float area;
 
-    @JsonProperty("status")
-    
+    @JsonProperty("status")    
     private String jobStatus;
+
+    @JsonProperty("request_status")
+    private String requestStatus;
 }

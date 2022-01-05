@@ -49,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             Product product = productMapping.mapProductDtoToProduct(productDTO);
             productRepository.save(product);
+            productDTO=productMapping.mapProductToProductDto(product);
             return new BaseResponse<>(HttpStatus.OK, "Add successfully!", productDTO);
         } catch (Exception e) {
             return new BaseResponse<>(HttpStatus.BAD_REQUEST, "Add failed! " + e.getMessage());

@@ -1,11 +1,14 @@
 package com.example.demo.service.user;
 
-import java.util.List;
+import com.example.demo.base.response.BaseResponse;
+import com.example.demo.dto.user.UserDTO;
 
-public interface UserService<T> {
-    public List<T> getAll();
-    public T getUser(int userId);
-    public boolean addUser(T userDTO);
-    boolean removeUser(int userId);
-    
+public interface UserService {
+
+    BaseResponse getAllUsers();
+    BaseResponse registerUser(UserDTO userDTO);
+    BaseResponse removeUser(int userId);
+    BaseResponse login(UserDTO userDTO);
+    BaseResponse updateProfile(UserDTO userDTO);
+    BaseResponse profile(); 
 }

@@ -1,7 +1,10 @@
 package com.example.demo.entity.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -25,7 +28,7 @@ public class Society extends User{
     private String industryCode;
 
     @OneToMany(mappedBy = "society",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<FarmerSociety> farmers=new HashSet<>();
+    private Collection<FarmerSociety> farmers;
 
 
 }
